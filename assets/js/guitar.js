@@ -139,3 +139,30 @@ renderCategories();
 const handleCategoryChange = (e) =>{
     e.target.innerHTML = '<option>' + e.target.value + '</option>';
 }
+
+document.querySelector('#send-form').addEventListener('click',(e) => {
+    e.preventDefault();
+
+    sendRequest();
+})
+
+const sendRequest = () => {
+
+    const formElement = document.querySelector('.form-guitar');
+    let formSize = formElement.elements.length;
+
+    let requestData = {};
+
+    for(let i = 0 ; i < formSize ; i++) {
+        let el = formElement.elements[i];
+
+        if(el.nodeName === "SELECT"){
+            requestData[el.name] = el.value;
+        }
+       
+    }
+    
+    console.log(requestData);
+
+}
+

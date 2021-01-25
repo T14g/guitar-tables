@@ -1,0 +1,23 @@
+{
+  "name": "guitar-tables",
+  "version": "1.0.0",
+  "description": "Aplicação web que resolvi criar para organizar melhor meus treinos de guitarra",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server" : "http-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/T14g/guitar-tables.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/T14g/guitar-tables/issues"
+  },
+  "homepage": "https://github.com/T14g/guitar-tables#readme",
+  "dependencies": {
+    "http-server": "^0.12.3"
+  }
+}
