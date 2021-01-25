@@ -150,19 +150,35 @@ const sendRequest = () => {
 
     const formElement = document.querySelector('.form-guitar');
     let formSize = formElement.elements.length;
+    const title = document.querySelector('[name="nome-registro"]');
 
-    let requestData = {};
+    let treinos = {};
 
     for(let i = 0 ; i < formSize ; i++) {
         let el = formElement.elements[i];
 
         if(el.nodeName === "SELECT"){
-            requestData[el.name] = el.value;
+            treinos[el.name] = el.value;
         }
        
     }
+
+    let jsonObject = {
+        'name' : title.value,
+        'json' : treinos
+    };
+
+    fetch('http://localhost:3000/treino',{
+        method: "POST",
+        body: JSON.stringify(jsonObject),
+        headers: {"Content-type": "application/json; charset=UTF-8"}
+    })
+    // Handle success
+    .then(response => response.json())  // convert to json
+    .then(json => console.log(json))    //print data to console
+    .catch(err => console.log('Request Failed', err)); // Catch errors
     
-    console.log(requestData);
+   
 
 }
 
