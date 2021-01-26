@@ -7,6 +7,7 @@
 
     <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="./assets/css/toastr.min.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 <body>
     <header>
@@ -22,6 +23,10 @@
 
           <h4 class="mb-3">Planeje a semana na guitarra</h4>
 
+          <div class="opcoes-disponiveis" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+
+          <h5>Drop zone</h5>
+          <div class="drop-zone-guitar" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
           <form class="form-guitar" action="" method="POST">
             <input type="text" class="mb-2 form-control" name="nome-registro" class="form-control" placeholder="Nome do registro">
 

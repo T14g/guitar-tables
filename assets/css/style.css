@@ -1,0 +1,23 @@
+.opcoes-disponiveis::after{
+    display: table;
+    clear: both;
+    content: "";
+}
+
+.train-option{
+    margin-right: 20px;
+    background: purple;
+    color: #fff;
+    padding: 10px;
+    text-transform: uppercase;
+    font-weight: 600;
+    display: block;
+    float: left;
+    margin-bottom: 10px;
+}
+
+.drop-zone-guitar{
+    height: 300px;
+    width: 100%;
+    border: 1px purple solid;
+}

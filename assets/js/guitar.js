@@ -250,8 +250,6 @@ const renderListTreinos = (treinos) => {
             
  
             html += `</tbody></table>`;
-
-            console.log(html);
         
         }) 
     }
@@ -259,5 +257,42 @@ const renderListTreinos = (treinos) => {
     document.querySelector('.treino-list-container').innerHTML = html;
 }
 
+//Renderiza opções draggable para montar seu treino
+const renderDragabbleOptions = () =>{
+
+    let categories = Object.keys(appData);
+    let html = '';
+    let dragOptions = [];
+    let count = 1;
+
+    categories.map(cat=>{
+        if(appData[cat].length > 0 ){
+            dragOptions = [...dragOptions, ...appData[cat]];
+        }
+    })
+
+    dragOptions.map(option =>{
+        html += '<span id="elemento-' + count + '" draggable="true" ondragstart="drag(event)" class="train-option">' + option.nome + '</span>';
+        count++;
+    })
+
+
+    document.querySelector('.opcoes-disponiveis').innerHTML = html;
+}
+
+function allowDrop(ev) {
+    ev.preventDefault();
+}
+
+function drag(ev) {
+    ev.dataTransfer.setData("text", ev.target.id);
+}
+
+function drop(ev) {
+    ev.preventDefault();
+    var data = ev.dataTransfer.getData("text");
+    ev.target.appendChild(document.getElementById(data));
+}
 
 getTreinos();
+renderDragabbleOptions();
