@@ -3,24 +3,29 @@ const Treino = require('../models/Treino');
 const router = new express.Router();
 
 router.post('/treino', async(req, res) => {
-   const jsonStr = JSON.stringify(req.body.json);
-   const name = req.body.name;
 
-   const obj = {
-      'name' : name,
-      'json' : jsonStr
-   }
-
-   const treino = new Treino(obj);
+   const treino = new Treino(req.body);
    
    try {
         await treino.save();
         //if task is saved send 201 response
         res.status(201).send(treino);
     } catch (e) {
-       console.log(e);
-        res.status(400).send(e);
+         console.log(e);
+         res.status(400).send(e);
     }
+ 
+})
+
+router.get('/treinos', async(req, res) => {
+
+   try {
+      let treinos = await Treino.find({});
+      res.status(200).send(treinos);
+   } catch (e) {
+      console.log(e);
+         res.status(400).send(e);
+   }
  
 })
 

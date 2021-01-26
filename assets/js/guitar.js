@@ -165,7 +165,7 @@ const sendRequest = () => {
 
     let jsonObject = {
         'name' : title.value,
-        'json' : treinos
+        'json' : JSON.stringify(treinos)
     };
 
     fetch('http://localhost:3000/treino',{
@@ -178,7 +178,86 @@ const sendRequest = () => {
     .then(json => console.log(json))    //print data to console
     .catch(err => console.log('Request Failed', err)); // Catch errors
     
-   
-
 }
 
+//Faz um GET retornando os treinos de guitarra se existirem
+const getTreinos = () => {
+    fetch('http://localhost:3000/treinos',{
+        method: "GET"
+    }) 
+    // Handle success
+    .then(response => response.json())  // convert to json
+    .then(data => renderListTreinos(data))    //print data to console
+    .catch(err => console.log('Request Failed', err)); // Catch errors
+}
+
+//Renderiza a lista de treinos de guitarra
+const renderListTreinos = (treinos) => {
+    console.log(treinos);
+    let html = ``;
+
+    if(treinos.length > 0){
+        treinos.map(treino => {
+
+            let nome = treino.name;
+            let dados = JSON.parse(treino.json);
+            let arrayTreinos = Object.values(dados);
+            let size = arrayTreinos.length;
+
+            html += `<h4>${nome}</h4>`;
+            html += `<table class="table table-listagem">`;
+            html += `<thead class="thead-dark"><tr>`
+                
+            html += `<th>Domingo</th>`;
+            html += `<th>Segunda</th>`;
+            html += `<th>Terça</th>`;
+            html += `<th>Quarta</th>`;
+            html += `<th>Quinta</th>`;
+            html += `<th>Sexta</th>`;
+            html += `<th>Sábado</th>`;
+            html += `</tr>`;
+            html += `</thead><tbody>`;
+
+            if(size > 0){
+                
+                for(let i = 0; i < size; i++){
+                    if(i === 0){
+                        html += `<tr>`;
+                    }
+
+                    if(i === 7){
+                        html += `</tr>`;
+                        html += `<tr>`;
+                    }
+
+                    if(i === 14){
+                        html += `</tr>`;
+                        html += `<tr>`;
+                    }
+
+                    if(i === 21){
+                        html += `</tr>`;
+                        html += `<tr>`;
+                    }
+
+                    if(i === 28){
+                        html += `</tr>`;
+                    }
+
+                    html += `<td>${arrayTreinos[i]}</td>`;
+                }
+            }
+            
+ 
+            html += `</tbody></table>`;
+
+            console.log(html);
+        
+        }) 
+    }
+
+    document.querySelector('.treino-list-container').innerHTML = html;
+}
+
+
+getTreinos();
