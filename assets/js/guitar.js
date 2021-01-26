@@ -117,10 +117,10 @@ const renderCategories = () => {
 
         for(var k = 1; k <= 7 ;k++) {
             
-            html += '<td><select onChange="handleCategoryChange(event)" class="form-control category-select" name=select-' + i+ '-' + k +'>';
+            html += '<td><select class="form-control category-select" name=select-' + i+ '-' + k +'>';
             html += '<option selected="true" disabled="disabled">Selecione</option>';
             opcoesSelect.map(opcao=>{
-                html += '<option value='+ opcao.nome  + '>' + opcao.nome + '</option>';
+                html += '<option value="'+ opcao.nome  + '">' + opcao.nome + '</option>';
             })
 
             html += '</td></select>';

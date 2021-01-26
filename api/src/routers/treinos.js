@@ -3,7 +3,7 @@ const Treino = require('../models/Treino');
 const router = new express.Router();
 
 router.post('/treino', async(req, res) => {
-
+   console.log(req.body);
    const treino = new Treino(req.body);
    
    try {
