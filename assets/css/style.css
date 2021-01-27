@@ -21,3 +21,14 @@
     width: 100%;
     border: 1px purple solid;
 }
+
+.table-guitar-drop td{
+    width: 138px;
+}
+
+.drop-here{
+    max-width: 138px;
+    height: 400px;
+    border: 1px purple solid;
+    
+}
