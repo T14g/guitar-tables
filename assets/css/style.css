@@ -80,3 +80,28 @@
     font-weight: bold;
     text-align: center;
 }
+
+.navbar-dark .navbar-brand{
+    font-size: 51px;
+    text-transform: uppercase; 
+    font-weight: 600;
+    font-family: 'New Rocker', cursive;
+    margin-bottom: 20px;
+} 
+.navbar-brand {
+    position: relative;
+}
+.navbar-brand .sub-title{
+    font-family: 'Roboto', sans-serif;
+    position: absolute;
+    bottom: -8px;
+    font-size: 13px;
+    left: 82px;
+}
+
+.navbar-dark .navbar-brand svg{
+    width: 70px;
+    height: 70px;
+    position: relative;
+    top: 28px;
+}
