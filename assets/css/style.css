@@ -13,7 +13,8 @@
     font-weight: 600;
     display: block;
     float: left;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
+    font-size: 14px;
 }
 
 .drop-zone-guitar{
@@ -22,8 +23,18 @@
     border: 1px purple solid;
 }
 
-.table-guitar-drop td{
-    width: 138px;
+.table-guitar-drops th{
+    width: 150px;
+    text-align: center;
+}
+
+.table-guitar-drops td .train-option{
+    width: 100%;
+    font-size: 11px;
+    text-align: center;
+    float: none;
+    min-height: 58px;
+    line-height: 18px;
 }
 
 .drop-here{
@@ -31,4 +42,25 @@
     height: 400px;
     border: 1px purple solid;
     
+}
+
+.delete-item{
+    background: red;
+    text-align: center;
+    padding: 10px;
+}
+
+.delete-item svg{
+    width: 60px;
+    height: 60px;
+    fill: #fff;
+}
+
+.delete-item span{
+    color: #fff;
+    text-transform: uppercase;
+    position: relative;
+    top: -10px;
+    font-size: 35px;
+    font-weight: 600;
 }

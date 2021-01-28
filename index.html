@@ -23,9 +23,12 @@
 
           <h4 class="mb-3">Planeje a semana na guitarra</h4>
 
-          <div class="opcoes-disponiveis" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+          <div class="opcoes-disponiveis"></div>
 
-          <h5>Drop zone</h5>
+            <div class="delete-item" ondrop="deleteElement(event)"  ondragover="allowDrop(event)">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M3 6v18h18v-18h-18zm5 14c0 .552-.448 1-1 1s-1-.448-1-1v-10c0-.552.448-1 1-1s1 .448 1 1v10zm5 0c0 .552-.448 1-1 1s-1-.448-1-1v-10c0-.552.448-1 1-1s1 .448 1 1v10zm5 0c0 .552-.448 1-1 1s-1-.448-1-1v-10c0-.552.448-1 1-1s1 .448 1 1v10zm4-18v2h-20v-2h5.711c.9 0 1.631-1.099 1.631-2h5.315c0 .901.73 2 1.631 2h5.712z"/></svg>
+              <span>Solte aqui para excluir</span>
+            </div>
             <table class="table table-guitar-drops">
               <thead class="thead-dark">
                   <tr>
@@ -38,35 +41,37 @@
                       <th>Sábado</th>
                   </tr>
               </thead>
+                
+              <tbody>
                 <tr>
                   <td>
-                    <div class="drop-here" ondrop="drop(event)" ondragover="allowDrop(event)"  ></div>
+                    <div class="drop-here" ondrop="drop(event)"  ondragover="allowDrop(event)"  ></div>
                   </td>
                   <td>
-                    <div class="drop-here" ondrop="drop(event)" ondragover="allowDrop(event)" ></div>
+                    <div class="drop-here" ondrop="drop(event)"  ondragover="allowDrop(event)" ></div>
                   </td>
                   <td>
-                    <div class="drop-here" ondrop="drop(event)" ondragover="allowDrop(event)" ></div>
+                    <div class="drop-here" ondrop="drop(event)"  ondragover="allowDrop(event)" ></div>
                   </td>
                   <td>
-                    <div class="drop-here" ondrop="drop(event)" ondragover="allowDrop(event)" ></div>
+                    <div class="drop-here" ondrop="drop(event)"  ondragover="allowDrop(event)" ></div>
                   </td>
                   <td>
-                    <div class="drop-here" ondrop="drop(event)" ondragover="allowDrop(event)" ></div>
+                    <div class="drop-here" ondrop="drop(event)"  ondragover="allowDrop(event)" ></div>
                   </td>
                   <td>
-                    <div class="drop-here" ondrop="drop(event)" ondragover="allowDrop(event)" ></div>
+                    <div class="drop-here" ondrop="drop(event)"  ondragover="allowDrop(event)" ></div>
                   </td>
                   <td>
-                    <div class="drop-here" ondrop="drop(event)" ondragover="allowDrop(event)" ></div>
+                    <div class="drop-here" ondrop="drop(event)"  ondragover="allowDrop(event)" ></div>
                   </td>
                 </tr>
-              <tbody>
-                
               </tbody>
-          </table>
-          </div>
-          <form class="form-guitar" action="" method="POST">
+            </table>
+
+            <button class="btn btn-dark btn-lg btn-block mb-3" type="submit" id="send-form">Salvar tabela</button>
+        </div>
+          <!-- <form class="form-guitar" action="" method="POST">
             <input type="text" class="mb-2 form-control" name="nome-registro" class="form-control" placeholder="Nome do registro">
 
             <table class="table table-guitar">
@@ -91,19 +96,21 @@
             <hr class="mb-4">
             <button class="btn btn-success btn-lg btn-block mb-3" type="submit" id="send-form">Salvar tabela</button>
          
-          </form>
+          </form> -->
         </div>
-      </div>
 
-      <div class="row">
-        <div class="col-md-12">
-          <h3 class="mb-3">Treinos encontrados</h3>
-          <div class="treino-list-container">
-
+        <!-- <div class="row">
+          <div class="col-md-12">
+            <h3 class="mb-3">Treinos encontrados</h3>
+            <div class="treino-list-container">
+  
+            </div>
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
+
+      
 
     <footer>
       <p class="font-weight-bold small text-center">&copy; 2021 Código desenvolvido por <a href="https://github.com/t14g" target="_blank">T14g</a></p>

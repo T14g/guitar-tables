@@ -134,17 +134,17 @@ const renderCategories = () => {
 
 }
 
-renderCategories();
+// renderCategories();
 
 const handleCategoryChange = (e) =>{
     e.target.innerHTML = '<option>' + e.target.value + '</option>';
 }
 
-document.querySelector('#send-form').addEventListener('click',(e) => {
-    e.preventDefault();
+// document.querySelector('#send-form').addEventListener('click',(e) => {
+//     e.preventDefault();
 
-    sendRequest();
-})
+//     sendRequest();
+// })
 
 const sendRequest = () => {
 
@@ -286,14 +286,48 @@ function allowDrop(ev) {
 
 function drag(ev) {
     ev.dataTransfer.setData("text", ev.target.id);
+
+    if(ev.target.dataset.index){
+        ev.dataTransfer.setData("el-index", ev.target.dataset.index);
+    }
+}
+
+//Encontra o maior index se existir de um elemento com index
+function biggestIndex(){
+    let elements = document.querySelectorAll('[data-index]');
+    let maior = 0;
+    
+    if(elements.length > 0){
+
+        let array = [...elements];
+
+        array.map(el=> {
+            if(parseInt(el.dataset.index) > maior){
+                maior = parseInt(el.dataset.index);
+            }
+        })
+    }
+
+    return maior;
 }
 
 function drop(ev) {
     ev.preventDefault();
     var data = ev.dataTransfer.getData("text");
     var nodeCopy = document.getElementById(data).cloneNode(true);
+    var newIndex = biggestIndex() + 1;
+
+    nodeCopy.dataset.index = newIndex;
+    
     ev.target.appendChild(nodeCopy);
 }
 
-getTreinos();
+function deleteElement(e) {
+    var index = e.dataTransfer.getData("el-index");
+    el = document.querySelector('[data-index="' + index+ '"]');
+    el.remove();
+    
+}
+
+// getTreinos();
 renderDragabbleOptions();
