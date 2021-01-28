@@ -140,45 +140,11 @@ const handleCategoryChange = (e) =>{
     e.target.innerHTML = '<option>' + e.target.value + '</option>';
 }
 
-// document.querySelector('#send-form').addEventListener('click',(e) => {
-//     e.preventDefault();
+document.querySelector('#send-form').addEventListener('click',(e) => {
+    e.preventDefault();
 
-//     sendRequest();
-// })
-
-const sendRequest = () => {
-
-    const formElement = document.querySelector('.form-guitar');
-    let formSize = formElement.elements.length;
-    const title = document.querySelector('[name="nome-registro"]');
-
-    let treinos = {};
-
-    for(let i = 0 ; i < formSize ; i++) {
-        let el = formElement.elements[i];
-
-        if(el.nodeName === "SELECT"){
-            treinos[el.name] = el.value;
-        }
-       
-    }
-
-    let jsonObject = {
-        'name' : title.value,
-        'json' : JSON.stringify(treinos)
-    };
-
-    fetch('http://localhost:3000/treino',{
-        method: "POST",
-        body: JSON.stringify(jsonObject),
-        headers: {"Content-type": "application/json; charset=UTF-8"}
-    })
-    // Handle success
-    .then(response => response.json())  // convert to json
-    .then(json => console.log(json))    //print data to console
-    .catch(err => console.log('Request Failed', err)); // Catch errors
-    
-}
+    saveTreino();
+})
 
 //Faz um GET retornando os treinos de guitarra se existirem
 const getTreinos = () => {
@@ -280,10 +246,13 @@ const renderDragabbleOptions = () =>{
     document.querySelector('.opcoes-disponiveis').innerHTML = html;
 }
 
+
+//Helper 
 function allowDrop(ev) {
     ev.preventDefault();
 }
 
+//Salva o ID do elemento e o index do elemento se existir
 function drag(ev) {
     ev.dataTransfer.setData("text", ev.target.id);
 
@@ -311,6 +280,8 @@ function biggestIndex(){
     return maior;
 }
 
+
+//Disparado ao soltar um elemento nas colunas da tabela, cria uma cópia do elemento
 function drop(ev) {
     ev.preventDefault();
     var data = ev.dataTransfer.getData("text");
@@ -322,11 +293,121 @@ function drop(ev) {
     ev.target.appendChild(nodeCopy);
 }
 
+//Deleta um elemento solto na delete zone
 function deleteElement(e) {
     var index = e.dataTransfer.getData("el-index");
     el = document.querySelector('[data-index="' + index+ '"]');
     el.remove();
+}
+
+//Salva treinos
+function saveTreino() {
+
+    const domingo = document.querySelector('#treino-domingo');
+    const segunda = document.querySelector('#treino-segunda');
+    const terca = document.querySelector('#treino-terca');
+    const quarta = document.querySelector('#treino-quarta');
+    const quinta = document.querySelector('#treino-quinta');
+    const sexta = document.querySelector('#treino-sexta');
+    const sabado = document.querySelector('#treino-sabado');
+
+    const treinos = {};
+
+    if(domingo.children.length > 0) {
+        let elements = [...domingo.children];
+        let arr = [];
+
+        elements.map(el=>{
+           arr.push(el.innerHTML);
+        })
+
+        treinos['domingo'] = arr;
+    }
+
+    if(segunda.children.length > 0) {
+        let elements = [...segunda.children];
+        let arr = [];
+
+        elements.map(el=>{
+           arr.push(el.innerHTML);
+        })
+
+        treinos['segunda'] = arr;
+    }
+
+    if(terca.children.length > 0) {
+        let elements = [...terca.children];
+        let arr = [];
+
+        elements.map(el=>{
+           arr.push(el.innerHTML);
+        })
+
+        treinos['terca'] = arr;
+    }
+
+    if(quarta.children.length > 0) {
+        let elements = [...quarta.children];
+        let arr = [];
+
+        elements.map(el=>{
+           arr.push(el.innerHTML);
+        })
+
+        treinos['quarta'] = arr;
+    }
+
+    if(quinta.children.length > 0) {
+        let elements = [...quinta.children];
+        let arr = [];
+
+        elements.map(el=>{
+           arr.push(el.innerHTML);
+        })
+
+        treinos['quinta'] = arr;
+    }
+
+    if(sexta.children.length > 0) {
+        let elements = [...sexta.children];
+        let arr = [];
+
+        elements.map(el=>{
+           arr.push(el.innerHTML);
+        })
+
+        treinos['sexta'] = arr;
+    }
+
+    if(sabado.children.length > 0) {
+        let elements = [...sabado.children];
+        let arr = [];
+
+        elements.map(el=>{
+           arr.push(el.innerHTML);
+        })
+
+        treinos['sabado'] = arr;
+    }
     
+    const title = document.querySelector('[name="nome-registro"]');
+
+    let jsonObject = {
+        'name' : title.value,
+        'json' : JSON.stringify(treinos)
+    };
+
+    fetch('http://localhost:3000/treino',{
+        method: "POST",
+        body: JSON.stringify(jsonObject),
+        headers: {"Content-type": "application/json; charset=UTF-8"}
+    })
+    // Handle success
+    .then(response => response.json())  // convert to json
+    .then(json => console.log(json))    //print data to console
+    .catch(err => console.log('Request Failed', err)); // Catch errors
+    
+
 }
 
 // getTreinos();

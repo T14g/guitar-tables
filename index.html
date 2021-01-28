@@ -22,6 +22,8 @@
         <div class="col-md-12">
 
           <h4 class="mb-3">Planeje a semana na guitarra</h4>
+          <p class="bolder">Digite um nome no campo abaixo antes de salvar a tabela</p>
+          <input type="text" class="mb-2 form-control" name="nome-registro" class="form-control" placeholder="!!! Digite um nome aqui para o treino antes de salvar!!!">
 
           <div class="opcoes-disponiveis"></div>
 
@@ -45,30 +47,30 @@
               <tbody>
                 <tr>
                   <td>
-                    <div class="drop-here" ondrop="drop(event)"  ondragover="allowDrop(event)"  ></div>
+                    <div class="drop-here" id="treino-domingo" ondrop="drop(event)"  ondragover="allowDrop(event)"  ></div>
                   </td>
                   <td>
-                    <div class="drop-here" ondrop="drop(event)"  ondragover="allowDrop(event)" ></div>
+                    <div class="drop-here" id="treino-segunda" ondrop="drop(event)"  ondragover="allowDrop(event)" ></div>
                   </td>
                   <td>
-                    <div class="drop-here" ondrop="drop(event)"  ondragover="allowDrop(event)" ></div>
+                    <div class="drop-here" id="treino-terca" ondrop="drop(event)"  ondragover="allowDrop(event)" ></div>
                   </td>
                   <td>
-                    <div class="drop-here" ondrop="drop(event)"  ondragover="allowDrop(event)" ></div>
+                    <div class="drop-here" id="treino-quarta" ondrop="drop(event)"  ondragover="allowDrop(event)" ></div>
                   </td>
                   <td>
-                    <div class="drop-here" ondrop="drop(event)"  ondragover="allowDrop(event)" ></div>
+                    <div class="drop-here" id="treino-quinta" ondrop="drop(event)"  ondragover="allowDrop(event)" ></div>
                   </td>
                   <td>
-                    <div class="drop-here" ondrop="drop(event)"  ondragover="allowDrop(event)" ></div>
+                    <div class="drop-here" id="treino-sexta" ondrop="drop(event)"  ondragover="allowDrop(event)" ></div>
                   </td>
                   <td>
-                    <div class="drop-here" ondrop="drop(event)"  ondragover="allowDrop(event)" ></div>
+                    <div class="drop-here" id="treino-sabado" ondrop="drop(event)"  ondragover="allowDrop(event)" ></div>
                   </td>
                 </tr>
               </tbody>
             </table>
-
+            
             <button class="btn btn-dark btn-lg btn-block mb-3" type="submit" id="send-form">Salvar tabela</button>
         </div>
           <!-- <form class="form-guitar" action="" method="POST">

@@ -64,3 +64,14 @@
     font-size: 35px;
     font-weight: 600;
 }
+
+
+[name="nome-registro"]{
+    border: 2px red solid;
+    text-align: center;
+}
+
+[name="nome-registro"]::placeholder{
+    font-weight: bold;
+    text-align: center;
+}
