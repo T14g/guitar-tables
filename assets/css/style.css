@@ -23,12 +23,12 @@
     border: 1px purple solid;
 }
 
-.table-guitar-drops th{
+.table-guitar-drops th, .table-listagem th{
     width: 150px;
     text-align: center;
 }
 
-.table-guitar-drops td .train-option{
+.table-guitar-drops td .train-option, .table-listagem td .train-option{
     width: 100%;
     font-size: 11px;
     text-align: center;
@@ -37,11 +37,16 @@
     line-height: 18px;
 }
 
-.drop-here{
+.drop-here, .list-week{
     max-width: 138px;
     height: 400px;
     border: 1px purple solid;
     
+}
+
+.list-week{
+    height: initial;
+    border: none;
 }
 
 .delete-item{

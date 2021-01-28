@@ -163,12 +163,16 @@ const renderListTreinos = (treinos) => {
     let html = ``;
 
     if(treinos.length > 0){
-        treinos.map(treino => {
+        let arr = treinos.reverse();
+        arr.map(treino => {
 
             let nome = treino.name;
             let dados = JSON.parse(treino.json);
-            let arrayTreinos = Object.values(dados);
-            let size = arrayTreinos.length;
+            
+
+           
+
+            console.log(dados);
 
             html += `<h4>${nome}</h4>`;
             html += `<table class="table table-listagem">`;
@@ -182,39 +186,92 @@ const renderListTreinos = (treinos) => {
             html += `<th>Sexta</th>`;
             html += `<th>Sábado</th>`;
             html += `</tr>`;
-            html += `</thead><tbody>`;
+            html += `</thead><tbody><tr>`;
 
-            if(size > 0){
-                
-                for(let i = 0; i < size; i++){
-                    if(i === 0){
-                        html += `<tr>`;
-                    }
+            if(dados.domingo && dados.domingo.length > 0){
+                html += `<td><div class="list-domingo list-week">`;
 
-                    if(i === 7){
-                        html += `</tr>`;
-                        html += `<tr>`;
-                    }
+                dados.domingo.map(item => {
+                    html += ` <span class="train-option">${item}</span>`;
+                })
 
-                    if(i === 14){
-                        html += `</tr>`;
-                        html += `<tr>`;
-                    }
-
-                    if(i === 21){
-                        html += `</tr>`;
-                        html += `<tr>`;
-                    }
-
-                    if(i === 28){
-                        html += `</tr>`;
-                    }
-
-                    html += `<td>${arrayTreinos[i]}</td>`;
-                }
+                html +=`</td>`;
+            }else{
+                html += `<td><div class="list-domingo"></div></td>`;
             }
-            
- 
+
+            if(dados.segunda && dados.segunda.length > 0){
+                html += `<td><div class="list-segunda list-week">`;
+
+                dados.segunda.map(item => {
+                    html += ` <span class="train-option">${item}</span>`;
+                })
+
+                html +=`</td>`;
+            }else{
+                html += `<td><div class="list-segunda"></div></td>`;
+            }
+
+            if(dados.terca && dados.terca.length > 0){
+                html += `<td><div class="list-terca list-week">`;
+
+                dados.terca.map(item => {
+                    html += ` <span class="train-option">${item}</span>`;
+                })
+
+                html +=`</td>`;
+            }else{
+                html += `<td><div class="list-terca"></div></td>`;
+            }
+
+            if(dados.quarta && dados.quarta.length > 0){
+                html += `<td><div class="list-quarta list-week">`;
+
+                dados.quarta.map(item => {
+                    html += ` <span class="train-option">${item}</span>`;
+                })
+
+                html +=`</td>`;
+            }else{
+                html += `<td><div class="list-quarta"></div></td>`;
+            }
+
+            if(dados.quinta && dados.quinta.length > 0){
+                html += `<td><div class="list-quinta list-week">`;
+
+                dados.quinta.map(item => {
+                    html += ` <span class="train-option">${item}</span>`;
+                })
+
+                html +=`</td>`;
+            }else{
+                html += `<td><div class="list-quinta"></div></td>`;
+            }
+
+            if(dados.sexta && dados.sexta.length > 0){
+                html += `<td><div class="list-sexta list-week">`;
+
+                dados.sexta.map(item => {
+                    html += ` <span class="train-option">${item}</span>`;
+                })
+
+                html +=`</td>`;
+            }else{
+                html += `<td><div class="list-sexta"></div></td>`;
+            }
+
+            if(dados.sabado && dados.sabado.length > 0){
+                html += `<td><div class="list-sabado list-week">`;
+
+                dados.sabado.map(item => {
+                    html += ` <span class="train-option">${item}</span>`;
+                })
+
+                html +=`</td>`;
+            }else{
+                html += `<td><div class="list-sabado"></div></td>`;
+            }
+
             html += `</tbody></table>`;
         
         }) 
@@ -303,6 +360,7 @@ function deleteElement(e) {
 //Salva treinos
 function saveTreino() {
 
+    const title = document.querySelector('[name="nome-registro"]');
     const domingo = document.querySelector('#treino-domingo');
     const segunda = document.querySelector('#treino-segunda');
     const terca = document.querySelector('#treino-terca');
@@ -390,7 +448,6 @@ function saveTreino() {
         treinos['sabado'] = arr;
     }
     
-    const title = document.querySelector('[name="nome-registro"]');
 
     let jsonObject = {
         'name' : title.value,
@@ -403,12 +460,28 @@ function saveTreino() {
         headers: {"Content-type": "application/json; charset=UTF-8"}
     })
     // Handle success
-    .then(response => response.json())  // convert to json
-    .then(json => console.log(json))    //print data to console
+    .then((response) =>{
+
+        //Limpa tabela e atualiza a lista de treinos
+        clearTreinos();
+        getTreinos();
+    })   
     .catch(err => console.log('Request Failed', err)); // Catch errors
     
 
 }
 
-// getTreinos();
+//Limpa as opções escolhidas e o nome da tabela
+function clearTreinos(){
+    document.querySelector('#treino-domingo').innerHTML = "";
+    document.querySelector('#treino-segunda').innerHTML = "";
+    document.querySelector('#treino-terca').innerHTML = "";
+    document.querySelector('#treino-quarta').innerHTML = "";
+    document.querySelector('#treino-quinta').innerHTML = "";
+    document.querySelector('#treino-sexta').innerHTML = "";
+    document.querySelector('#treino-sabado').innerHTML = "";
+    document.querySelector('[name="nome-registro"]').innerHTML = "";
+}
+
+getTreinos();
 renderDragabbleOptions();
