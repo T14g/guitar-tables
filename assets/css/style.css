@@ -1,3 +1,7 @@
+header nav{
+    background-color: #212529;
+}
+
 .opcoes-disponiveis::after{
     display: table;
     clear: both;
@@ -104,4 +108,38 @@
     height: 70px;
     position: relative;
     top: 28px;
+}
+
+footer p{
+    color: #fff;
+    padding: 10px;
+    text-transform: uppercase;
+}
+
+footer p a {
+    color: rgb(20, 102, 197);
+    margin-left: 5px;
+}
+
+.guitar-table-info, .table-listagem{
+    border: 2px #212529 solid;
+}
+
+.table-listagem {
+    border: 2px #212529 solid;
+    margin-bottom: 0;
+}
+
+.guitar-table-info{
+    border-top: none;
+    font-weight: 900;
+    text-align: right;
+    padding: 5px;
+    font-size: 22px;
+    text-transform: uppercase;
+    margin-bottom: 50px;
+}
+
+.guitar-table-info span{
+    color: purple;
 }

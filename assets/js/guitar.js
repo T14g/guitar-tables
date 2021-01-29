@@ -140,11 +140,11 @@ const handleCategoryChange = (e) =>{
     e.target.innerHTML = '<option>' + e.target.value + '</option>';
 }
 
-document.querySelector('#send-form').addEventListener('click',(e) => {
-    e.preventDefault();
+// document.querySelector('#send-form').addEventListener('click',(e) => {
+//     e.preventDefault();
 
-    saveTreino();
-})
+//     saveTreino();
+// })
 
 //Faz um GET retornando os treinos de guitarra se existirem
 const getTreinos = () => {
@@ -166,113 +166,7 @@ const renderListTreinos = (treinos) => {
         let arr = treinos.reverse();
         arr.map(treino => {
 
-            let nome = treino.name;
-            let dados = JSON.parse(treino.json);
-            
-
-           
-
-            console.log(dados);
-
-            html += `<h4>${nome}</h4>`;
-            html += `<table class="table table-listagem">`;
-            html += `<thead class="thead-dark"><tr>`
-                
-            html += `<th>Domingo</th>`;
-            html += `<th>Segunda</th>`;
-            html += `<th>Terça</th>`;
-            html += `<th>Quarta</th>`;
-            html += `<th>Quinta</th>`;
-            html += `<th>Sexta</th>`;
-            html += `<th>Sábado</th>`;
-            html += `</tr>`;
-            html += `</thead><tbody><tr>`;
-
-            if(dados.domingo && dados.domingo.length > 0){
-                html += `<td><div class="list-domingo list-week">`;
-
-                dados.domingo.map(item => {
-                    html += ` <span class="train-option">${item}</span>`;
-                })
-
-                html +=`</td>`;
-            }else{
-                html += `<td><div class="list-domingo"></div></td>`;
-            }
-
-            if(dados.segunda && dados.segunda.length > 0){
-                html += `<td><div class="list-segunda list-week">`;
-
-                dados.segunda.map(item => {
-                    html += ` <span class="train-option">${item}</span>`;
-                })
-
-                html +=`</td>`;
-            }else{
-                html += `<td><div class="list-segunda"></div></td>`;
-            }
-
-            if(dados.terca && dados.terca.length > 0){
-                html += `<td><div class="list-terca list-week">`;
-
-                dados.terca.map(item => {
-                    html += ` <span class="train-option">${item}</span>`;
-                })
-
-                html +=`</td>`;
-            }else{
-                html += `<td><div class="list-terca"></div></td>`;
-            }
-
-            if(dados.quarta && dados.quarta.length > 0){
-                html += `<td><div class="list-quarta list-week">`;
-
-                dados.quarta.map(item => {
-                    html += ` <span class="train-option">${item}</span>`;
-                })
-
-                html +=`</td>`;
-            }else{
-                html += `<td><div class="list-quarta"></div></td>`;
-            }
-
-            if(dados.quinta && dados.quinta.length > 0){
-                html += `<td><div class="list-quinta list-week">`;
-
-                dados.quinta.map(item => {
-                    html += ` <span class="train-option">${item}</span>`;
-                })
-
-                html +=`</td>`;
-            }else{
-                html += `<td><div class="list-quinta"></div></td>`;
-            }
-
-            if(dados.sexta && dados.sexta.length > 0){
-                html += `<td><div class="list-sexta list-week">`;
-
-                dados.sexta.map(item => {
-                    html += ` <span class="train-option">${item}</span>`;
-                })
-
-                html +=`</td>`;
-            }else{
-                html += `<td><div class="list-sexta"></div></td>`;
-            }
-
-            if(dados.sabado && dados.sabado.length > 0){
-                html += `<td><div class="list-sabado list-week">`;
-
-                dados.sabado.map(item => {
-                    html += ` <span class="train-option">${item}</span>`;
-                })
-
-                html +=`</td>`;
-            }else{
-                html += `<td><div class="list-sabado"></div></td>`;
-            }
-
-            html += `</tbody></table>`;
+            html += tableHTML(treino);
         
         }) 
     }
@@ -483,5 +377,143 @@ function clearTreinos(){
     document.querySelector('[name="nome-registro"]').innerHTML = "";
 }
 
+//GET no treino mais recente
+function getNewest() {
+    fetch('http://localhost:3000/treinos/newest',{
+        method: "GET"
+    }) 
+    // Handle success
+    .then(response => response.json())  // convert to json
+    .then(data => renderNewest(data))    //print data to console
+    .catch(err => console.log('Request Failed', err)); // Catch errors
+}
+
+//Renderiza o último treino criado se for encontrado
+function renderNewest(treino) {
+
+    let html = '';
+    
+    if(treino && treino.length > 0 ){
+        html += tableHTML(treino[0]);
+
+        document.querySelector('#app-container').innerHTML = html;
+    }
+}
+
+
+//Retorna o código HTML de uma tabela
+function tableHTML(data) {
+
+    let nome = data.name;
+    let dados = JSON.parse(data.json); 
+    let html = ``;
+
+    // html += `<h4>${nome}</h4>`;
+    html += `<table class="table table-listagem">`;
+    html += `<thead class="thead-dark"><tr>`
+        
+    html += `<th>Domingo</th>`;
+    html += `<th>Segunda</th>`;
+    html += `<th>Terça</th>`;
+    html += `<th>Quarta</th>`;
+    html += `<th>Quinta</th>`;
+    html += `<th>Sexta</th>`;
+    html += `<th>Sábado</th>`;
+    html += `</tr>`;
+    html += `</thead><tbody><tr>`;
+
+    if(dados.domingo && dados.domingo.length > 0){
+        html += `<td><div class="list-domingo list-week">`;
+
+        dados.domingo.map(item => {
+            html += ` <span class="train-option">${item}</span>`;
+        })
+
+        html +=`</td>`;
+    }else{
+        html += `<td><div class="list-domingo"></div></td>`;
+    }
+
+    if(dados.segunda && dados.segunda.length > 0){
+        html += `<td><div class="list-segunda list-week">`;
+
+        dados.segunda.map(item => {
+            html += ` <span class="train-option">${item}</span>`;
+        })
+
+        html +=`</td>`;
+    }else{
+        html += `<td><div class="list-segunda"></div></td>`;
+    }
+
+    if(dados.terca && dados.terca.length > 0){
+        html += `<td><div class="list-terca list-week">`;
+
+        dados.terca.map(item => {
+            html += ` <span class="train-option">${item}</span>`;
+        })
+
+        html +=`</td>`;
+    }else{
+        html += `<td><div class="list-terca"></div></td>`;
+    }
+
+    if(dados.quarta && dados.quarta.length > 0){
+        html += `<td><div class="list-quarta list-week">`;
+
+        dados.quarta.map(item => {
+            html += ` <span class="train-option">${item}</span>`;
+        })
+
+        html +=`</td>`;
+    }else{
+        html += `<td><div class="list-quarta"></div></td>`;
+    }
+
+    if(dados.quinta && dados.quinta.length > 0){
+        html += `<td><div class="list-quinta list-week">`;
+
+        dados.quinta.map(item => {
+            html += ` <span class="train-option">${item}</span>`;
+        })
+
+        html +=`</td>`;
+    }else{
+        html += `<td><div class="list-quinta"></div></td>`;
+    }
+
+    if(dados.sexta && dados.sexta.length > 0){
+        html += `<td><div class="list-sexta list-week">`;
+
+        dados.sexta.map(item => {
+            html += ` <span class="train-option">${item}</span>`;
+        })
+
+        html +=`</td>`;
+    }else{
+        html += `<td><div class="list-sexta"></div></td>`;
+    }
+
+    if(dados.sabado && dados.sabado.length > 0){
+        html += `<td><div class="list-sabado list-week">`;
+
+        dados.sabado.map(item => {
+            html += ` <span class="train-option">${item}</span>`;
+        })
+
+        html +=`</td>`;
+    }else{
+        html += `<td><div class="list-sabado"></div></td>`;
+    }
+
+    html += `</tr>`;
+    html += `</tbody>`;
+    html += `</table>`;
+    html += `<div class="guitar-table-info">Nome da tabela: <span>${nome}</span></div>`;
+
+    return html;
+}
+
 getTreinos();
 renderDragabbleOptions();
+getNewest();

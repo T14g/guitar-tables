@@ -24,9 +24,24 @@ router.get('/treinos', async(req, res) => {
       res.status(200).send(treinos);
    } catch (e) {
       console.log(e);
-         res.status(400).send(e);
+      res.status(400).send(e);
    }
  
+})
+
+//Retorna o treino de guitarra mais recente
+router.get('/treinos/newest', async( req, res) => {
+   
+   try{
+
+      let ultimo = await Treino.find({}).sort({_id:-1}).limit(1);
+      res.status(200).send(ultimo);
+
+   } catch (e) {
+      console.log(e);
+      res.status(400).send(e);
+   }
+
 })
 
 module.exports = router;
