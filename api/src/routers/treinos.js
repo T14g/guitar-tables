@@ -39,9 +39,27 @@ router.get('/treinos/newest', async( req, res) => {
 
    } catch (e) {
       console.log(e);
-      res.status(400).send(e);
+      res.status(500).send();
    }
 
+})
+
+//Deleta um treino de guitarra
+router.delete('/treino/:id', async( req, res) => {
+   try {
+
+      const treino = await Treino.findOneAndDelete({ _id: req.params.id });
+
+      if(!treino) {
+         res.status(404).send();
+      }
+
+      res.send(treino);
+
+   } catch (e) {
+      console.log(e);
+      res.status(500).send(e);
+   }
 })
 
 module.exports = router;

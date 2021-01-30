@@ -127,19 +127,37 @@ footer p a {
 
 .table-listagem {
     border: 2px #212529 solid;
-    margin-bottom: 0;
+    margin-bottom: 50px;
 }
 
 .guitar-table-info{
-    border-top: none;
     font-weight: 900;
-    text-align: right;
+    text-align: left;
     padding: 5px;
     font-size: 22px;
     text-transform: uppercase;
-    margin-bottom: 50px;
+    padding-left: 12px;
+    margin-bottom: 0;
+}
+
+.guitar-table-info::after{
+    content: "";
+    display: table;
+    clear: both;
 }
 
 .guitar-table-info span{
     color: purple;
+}
+
+.options-group{
+    display: block;
+    float: right;
+    padding-right: 6px;
+}
+
+
+.btn-options{
+    background: #212529;
+    text-transform: uppercase;
 }

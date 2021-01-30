@@ -140,11 +140,11 @@ const handleCategoryChange = (e) =>{
     e.target.innerHTML = '<option>' + e.target.value + '</option>';
 }
 
-// document.querySelector('#send-form').addEventListener('click',(e) => {
-//     e.preventDefault();
+document.querySelector('#send-form').addEventListener('click',(e) => {
+    e.preventDefault();
 
-//     saveTreino();
-// })
+    saveTreino();
+})
 
 //Faz um GET retornando os treinos de guitarra se existirem
 const getTreinos = () => {
@@ -403,12 +403,25 @@ function renderNewest(treino) {
 
 //Retorna o código HTML de uma tabela
 function tableHTML(data) {
-
+    // console.log(data);
     let nome = data.name;
+    let _id = data._id;
     let dados = JSON.parse(data.json); 
     let html = ``;
 
     // html += `<h4>${nome}</h4>`;
+    html += `<div class="guitar-table-info">Nome da tabela: <span>${nome}</span>
+    <div class="btn-group options-group">
+    <button class="btn btn-secondary btn-sm dropdown-toggle btn-options" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Opções
+    </button>
+    <div class="dropdown-menu">
+        <button class="dropdown-item">Editar</button>
+        <button class="dropdown-item" onClick="deleteTreino('${_id}')">Excluir</button>
+    </div>
+    </div>
+    </div>`;
+
     html += `<table class="table table-listagem">`;
     html += `<thead class="thead-dark"><tr>`
         
@@ -509,11 +522,30 @@ function tableHTML(data) {
     html += `</tr>`;
     html += `</tbody>`;
     html += `</table>`;
-    html += `<div class="guitar-table-info">Nome da tabela: <span>${nome}</span></div>`;
+    
 
     return html;
+}
+
+//Deleta uma tabela de treino
+function deleteTreino(id) {
+    fetch('http://localhost:3000/treino/' + id,{
+        method: "DELETE"
+    }) 
+    // Handle success
+    .then(response => response.json()) 
+    .then(data =>{  
+        console.log(data);
+        getTreinos();
+        getNewest();
+    })    
+    .catch(err => console.log('Request Failed', err)); 
+
+    
 }
 
 getTreinos();
 renderDragabbleOptions();
 getNewest();
+
+// deleteTreino('601247177bf10d0a036f9f7a');
