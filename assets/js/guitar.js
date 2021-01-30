@@ -140,11 +140,11 @@ const handleCategoryChange = (e) =>{
     e.target.innerHTML = '<option>' + e.target.value + '</option>';
 }
 
-document.querySelector('#send-form').addEventListener('click',(e) => {
-    e.preventDefault();
+// document.querySelector('#send-form').addEventListener('click',(e) => {
+//     e.preventDefault();
 
-    saveTreino();
-})
+//     saveTreino();
+// })
 
 //Faz um GET retornando os treinos de guitarra se existirem
 const getTreinos = () => {
@@ -392,6 +392,7 @@ function getNewest() {
 function renderNewest(treino) {
 
     let html = '';
+    html += '<h3 class="title-big">Ultima tabela criada</h3>';
     
     if(treino && treino.length > 0 ){
         html += tableHTML(treino[0]);
@@ -544,8 +545,18 @@ function deleteTreino(id) {
     
 }
 
-getTreinos();
-renderDragabbleOptions();
-getNewest();
+//Carrega a tela inicial
+function loadHome() {
+    getNewest();
+}
+
+//Carrega a tela de criação de nova tabel
+
+//Carrega a tela de edição
+function loadEdit(){
+
+}
+
+loadHome();
 
 // deleteTreino('601247177bf10d0a036f9f7a');

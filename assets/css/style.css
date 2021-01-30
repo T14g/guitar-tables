@@ -161,3 +161,44 @@ footer p a {
     background: #212529;
     text-transform: uppercase;
 }
+
+#app-container{
+    min-height: calc(100vh - 224px);
+}
+
+.title-big{
+    text-transform: uppercase;
+    font-weight: 900;
+    font-size: 40px;
+}
+
+
+.svg-new-table, .svg-list-tables{
+    width: 35px;
+    height: auto;
+    fill: #fff;
+}
+
+#navBarGuitar{
+    position: relative;
+}
+
+#navBarGuitar .navbar-nav{
+    position: absolute;
+    right: 0;
+    top: -24px;
+}
+
+#navBarGuitar .nav-item:first-child{
+    margin-right: 10px;
+}
+
+
+#navBarGuitar .nav-item span{
+    font-size: 25px;
+    font-weight: 600;
+    color: #fff;
+    position: relative;
+    top: -8px;
+    margin-left: 8px;
+}
