@@ -62,6 +62,47 @@ router.delete('/treino/:id', async( req, res) => {
    }
 })
 
+//Encontra uma tabela por ID
+router.get('/treino/:id', async (req, res) => {
+   try {
+
+      const treino = await Treino.findOne({ _id: req.params.id});
+
+      if(!treino) {
+         res.status(404).send();
+      }
+
+      res.send(treino);
+      
+   } catch (e) {
+      console.log(e);
+      res.status(500).send(e);
+   }
+})
+
+//Atualiza uma tabela de guitarra
+router.patch('/treino/:id', async( req, res ) => {
+   const updates = Object.keys(req.body);
+   
+   try {
+      const treino = await Treino.findOne({ _id: req.params.id});
+
+      if(!treino) {
+         res.status(404).send();
+      }
+
+      updates.forEach(update=> treino[update] = req.body[update]);
+
+      await treino.save();
+      
+      res.send(treino);
+
+   } catch (error) {
+      console.log(e);
+      res.status(500).send(e);
+   }
+})
+
 module.exports = router;
 
 // router.post('/treino', async (req, res) => {

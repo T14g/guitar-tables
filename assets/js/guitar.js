@@ -208,8 +208,11 @@ function allowDrop(ev) {
 
 //Salva o ID do elemento e o index do elemento se existir
 function drag(ev) {
-    ev.dataTransfer.setData("text", ev.target.id);
 
+    if(ev.target.id){
+        ev.dataTransfer.setData("text", ev.target.id);
+    }
+    
     if(ev.target.dataset.index){
         ev.dataTransfer.setData("el-index", ev.target.dataset.index);
     }
@@ -239,7 +242,14 @@ function biggestIndex(){
 function drop(ev) {
     ev.preventDefault();
     var data = ev.dataTransfer.getData("text");
-    var nodeCopy = document.getElementById(data).cloneNode(true);
+    var index = ev.dataTransfer.getData("el-index");
+
+    if(data){
+        var nodeCopy = document.getElementById(data).cloneNode(true);
+    }else{
+        var nodeCopy = document.querySelector('[data-index="' + index + '"]').cloneNode(true);
+    }
+    
     var newIndex = biggestIndex() + 1;
 
     nodeCopy.dataset.index = newIndex;
@@ -254,9 +264,8 @@ function deleteElement(e) {
     el.remove();
 }
 
-//Salva treinos
-function saveTreino() {
-
+//Retorna um json com os dados para criação/update
+function tableDataJSON() {
     const title = document.querySelector('[name="nome-registro"]');
     const domingo = document.querySelector('#treino-domingo');
     const segunda = document.querySelector('#treino-segunda');
@@ -351,9 +360,15 @@ function saveTreino() {
         'json' : JSON.stringify(treinos)
     };
 
+    return JSON.stringify(jsonObject);
+}
+
+//Salva treinos
+function saveTreino() {
+
     fetch('http://localhost:3000/treino',{
         method: "POST",
-        body: JSON.stringify(jsonObject),
+        body: tableDataJSON(),
         headers: {"Content-type": "application/json; charset=UTF-8"}
     })
     // Handle success
@@ -422,7 +437,7 @@ function tableHTML(data) {
         Opções
     </button>
     <div class="dropdown-menu">
-        <button class="dropdown-item">Editar</button>
+        <button class="dropdown-item" onClick="handleTableEdit('${_id}')">Editar</button>
         <button class="dropdown-item" onClick="deleteTreino('${_id}')">Excluir</button>
     </div>
     </div>
@@ -555,15 +570,8 @@ function loadHome() {
     getNewest();
 }
 
-//Carrega a tela de criação de nova tabel
-
-//Carrega a tela de edição
-function loadEdit(){
-
-}
-
-//Carrega a tela de criação de novas tabelas
-function loadNewTable() {
+//HTML da tabela com drag options
+function renderDragTable() {
     let html = `
     <div class="row mt-5">
         <div class="col-md-12">
@@ -627,6 +635,11 @@ function loadNewTable() {
     document.querySelector('#app-container').innerHTML = html;
 
     renderDragabbleOptions();
+}
+
+//Carrega a tela de criação de novas tabelas
+function loadNewTable() {
+    renderDragTable();
 
     document.querySelector('#send-form').addEventListener('click',(e) => {
         e.preventDefault();
@@ -679,8 +692,167 @@ function loadNavListeners() {
     })
 }
 
+//GET by ID
+function getTableByID(id) {
+    fetch('http://localhost:3000/treino/' + id,{
+        method: "GET"
+    }) 
+    // Handle success
+    .then(response => response.json()) 
+    .then(data =>{  
+        console.log(data);
+        // getTreinos();
+        // getNewest();
+    })    
+    .catch(err => console.log('Request Failed', err)); 
+}
+
+//Event handler da edição
+function handleTableEdit(id) {
+
+    fetch('http://localhost:3000/treino/' + id,{
+        method: "GET"
+    }) 
+    // Handle success
+    .then(response => response.json()) 
+    .then(data =>{  
+        renderEditing(data);
+        // getTreinos();
+        // getNewest();
+    })     
+    .catch(err => console.log('Request Failed', err)); 
+
+}
+
+//Render editing Screen
+function renderEditing(data) {
+
+    renderDragTable();
+    document.querySelector('[name="nome-registro"]').value = data.name;
+
+    const _id = data._id;
+    let treinos = JSON.parse(data.json);
+    let elementNumber = 1;
+
+
+    if(treinos.domingo && treinos.domingo.length > 0){
+        let html = ``;
+
+        treinos.domingo.map(item => {
+            html += ` <span  draggable="true" data-index=${elementNumber} ondragstart="drag(event)" draggable="true" ondragstart="drag(event)" class="train-option">${item}</span>`;
+            elementNumber++;
+        })
+
+        document.querySelector('#treino-domingo').innerHTML = html;
+    }
+
+    if(treinos.segunda && treinos.segunda.length > 0){
+        let html = ``;
+
+        treinos.segunda.map(item => {
+            html += ` <span  draggable="true" data-index=${elementNumber} ondragstart="drag(event)" class="train-option">${item}</span>`;
+            elementNumber++;
+        })
+
+        document.querySelector('#treino-segunda').innerHTML = html;
+    }
+
+    if(treinos.terca && treinos.terca.length > 0){
+        let html = ``;
+
+        treinos.terca.map(item => {
+            html += ` <span  draggable="true" data-index=${elementNumber} ondragstart="drag(event)" class="train-option">${item}</span>`;
+            elementNumber++;
+        })
+
+        document.querySelector('#treino-terca').innerHTML = html;
+    }
+
+    if(treinos.quarta && treinos.quarta.length > 0){
+        let html = ``;
+
+        treinos.quarta.map(item => {
+            html += ` <span  draggable="true" data-index=${elementNumber} ondragstart="drag(event)" class="train-option">${item}</span>`;
+            elementNumber++;
+        })
+
+        document.querySelector('#treino-quarta').innerHTML = html;
+    }
+
+    if(treinos.quinta && treinos.quinta.length > 0){
+        let html = ``;
+
+        treinos.quinta.map(item => {
+            html += ` <span  draggable="true" data-index=${elementNumber} ondragstart="drag(event)" class="train-option">${item}</span>`;
+            elementNumber++;
+        })
+
+        document.querySelector('#treino-quinta').innerHTML = html;
+    }
+
+    if(treinos.sexta && treinos.sexta.length > 0){
+        let html = ``;
+
+        treinos.sexta.map(item => {
+            html += ` <span  draggable="true" data-index=${elementNumber} ondragstart="drag(event)" class="train-option">${item}</span>`;
+            elementNumber++;
+        })
+
+        document.querySelector('#treino-sexta').innerHTML = html;
+    }
+
+    if(treinos.sabado && treinos.sabado.length > 0){
+        let html = ``;
+
+        treinos.sabado.map(item => {
+            html += ` <span  draggable="true" data-index=${elementNumber} ondragstart="drag(event)" class="train-option">${item}</span>`;
+            elementNumber++;
+        })
+
+        document.querySelector('#treino-sabado').innerHTML = html;
+    }
+
+    document.querySelector('#send-form').addEventListener('click',(e) => {
+        e.preventDefault();
+
+        updateTable(_id);
+
+        //Delay 1st to create and then reload home screen
+        setTimeout(function(){
+            loadTableList();
+        },1000);
+
+    })
+    
+}
+
+//Atualiza uma tabela
+//Event handler da edição
+function updateTable(id) {
+
+    const data = tableDataJSON();
+
+    fetch('http://localhost:3000/treino/' + id,{
+        headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+        },
+        method: "PATCH",
+        body: data
+    }) 
+    // Handle success
+    .then(response => response.json()) 
+    .then(data =>{  
+ 
+    })     
+    .catch(err => console.log('Request Failed', err)); 
+
+}
+
 //APP Init functions()
 loadNavListeners();
 loadHome();
+
+// patchTable('12345');
 
 
