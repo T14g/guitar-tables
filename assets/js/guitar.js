@@ -19,8 +19,11 @@ const appData = {
         {
             id: 4,
             nome: 'Livre/Fundamentos'
+        },
+        {
+            id: 5,
+            nome: 'Acordes'
         }
-
     ],
     Tecnica: [
         {
@@ -74,6 +77,10 @@ const appData = {
         {
             id: 5,
             nome: 'Livre/Improviso'
+        },
+        {
+            id: 6,
+            nome: 'Pentatonic G'
         }
     ],
     Leitura : [
@@ -140,11 +147,7 @@ const handleCategoryChange = (e) =>{
     e.target.innerHTML = '<option>' + e.target.value + '</option>';
 }
 
-// document.querySelector('#send-form').addEventListener('click',(e) => {
-//     e.preventDefault();
 
-//     saveTreino();
-// })
 
 //Faz um GET retornando os treinos de guitarra se existirem
 const getTreinos = () => {
@@ -398,6 +401,8 @@ function renderNewest(treino) {
         html += tableHTML(treino[0]);
 
         document.querySelector('#app-container').innerHTML = html;
+    }else{
+        document.querySelector('#app-container').innerHTML = "";
     }
 }
 
@@ -557,6 +562,125 @@ function loadEdit(){
 
 }
 
+//Carrega a tela de criação de novas tabelas
+function loadNewTable() {
+    let html = `
+    <div class="row mt-5">
+        <div class="col-md-12">
+
+        <h4 class="mb-3">Planeje a semana na guitarra</h4>
+        <p class="bolder">Digite um nome no campo abaixo antes de salvar a tabela</p>
+        <input type="text" class="mb-2 form-control" name="nome-registro" class="form-control" placeholder="!!! Digite um nome aqui para o treino antes de salvar!!!">
+
+        <div class="opcoes-disponiveis"></div>
+
+            <div class="delete-item" ondrop="deleteElement(event)"  ondragover="allowDrop(event)">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M3 6v18h18v-18h-18zm5 14c0 .552-.448 1-1 1s-1-.448-1-1v-10c0-.552.448-1 1-1s1 .448 1 1v10zm5 0c0 .552-.448 1-1 1s-1-.448-1-1v-10c0-.552.448-1 1-1s1 .448 1 1v10zm5 0c0 .552-.448 1-1 1s-1-.448-1-1v-10c0-.552.448-1 1-1s1 .448 1 1v10zm4-18v2h-20v-2h5.711c.9 0 1.631-1.099 1.631-2h5.315c0 .901.73 2 1.631 2h5.712z"/></svg>
+            <span>Solte aqui para excluir</span>
+            </div>
+            <table class="table table-guitar-drops">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Domingo</th>
+                    <th>Segunda</th>
+                    <th>Terça</th>
+                    <th>Quarta</th>
+                    <th>Quinta</th>
+                    <th>Sexta</th>
+                    <th>Sábado</th>
+                </tr>
+            </thead>
+                
+            <tbody>
+                <tr>
+                <td>
+                    <div class="drop-here" id="treino-domingo" ondrop="drop(event)"  ondragover="allowDrop(event)"  ></div>
+                </td>
+                <td>
+                    <div class="drop-here" id="treino-segunda" ondrop="drop(event)"  ondragover="allowDrop(event)" ></div>
+                </td>
+                <td>
+                    <div class="drop-here" id="treino-terca" ondrop="drop(event)"  ondragover="allowDrop(event)" ></div>
+                </td>
+                <td>
+                    <div class="drop-here" id="treino-quarta" ondrop="drop(event)"  ondragover="allowDrop(event)" ></div>
+                </td>
+                <td>
+                    <div class="drop-here" id="treino-quinta" ondrop="drop(event)"  ondragover="allowDrop(event)" ></div>
+                </td>
+                <td>
+                    <div class="drop-here" id="treino-sexta" ondrop="drop(event)"  ondragover="allowDrop(event)" ></div>
+                </td>
+                <td>
+                    <div class="drop-here" id="treino-sabado" ondrop="drop(event)"  ondragover="allowDrop(event)" ></div>
+                </td>
+                </tr>
+            </tbody>
+            </table>
+            
+            <button class="btn btn-dark btn-lg btn-block mb-3" type="submit" id="send-form">Salvar tabela</button>
+        </div> 
+        </div>
+    </div>
+    `;
+
+    document.querySelector('#app-container').innerHTML = html;
+
+    renderDragabbleOptions();
+
+    document.querySelector('#send-form').addEventListener('click',(e) => {
+        e.preventDefault();
+
+        saveTreino();
+
+        //Delay 1st to create and then reload home screen
+        setTimeout(function(){
+            loadHome();
+        },1000);
+
+    })
+}
+
+//Carrega a lista de tabelas
+function loadTableList() {
+    let html = `
+    <div class="row">
+        <div class="col-md-12">
+            <h3 class="mb-3">Treinos encontrados</h3>
+            <div class="treino-list-container">
+
+            </div>
+        </div>
+    </div>`
+
+    document.querySelector('#app-container').innerHTML = html;
+
+    getTreinos();
+}
+
+//Carrega event listeners da navbar
+function loadNavListeners() {
+    document.querySelector('.load-home').addEventListener('click', function(event){
+        event.preventDefault();
+
+        loadHome();
+    })
+
+    document.querySelector('.botao-nova').addEventListener('click', function(event){
+        event.preventDefault();
+
+        loadNewTable();
+    })
+
+    document.querySelector('.botao-listar').addEventListener('click', function(event){
+        event.preventDefault();
+
+        loadTableList();
+    })
+}
+
+//APP Init functions()
+loadNavListeners();
 loadHome();
 
-// deleteTreino('601247177bf10d0a036f9f7a');
+
