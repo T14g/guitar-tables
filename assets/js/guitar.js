@@ -460,7 +460,7 @@ function tableHTML(data) {
         html += `<td><div class="list-domingo list-week">`;
 
         dados.domingo.map(item => {
-            html += ` <span class="train-option">${item}</span>`;
+            html += ` <span class="train-option">${item}<span class="watch-container" onClick="displayCronometer('${_id}','${item}')"><span class="stop-watch-el"></span></span></span>`;
         })
 
         html +=`</td>`;
@@ -472,7 +472,7 @@ function tableHTML(data) {
         html += `<td><div class="list-segunda list-week">`;
 
         dados.segunda.map(item => {
-            html += ` <span class="train-option">${item}</span>`;
+            html += ` <span class="train-option">${item}<span class="watch-container" onClick="displayCronometer('${_id}','${item}')"><span class="stop-watch-el"></span></span></span>`;
         })
 
         html +=`</td>`;
@@ -484,7 +484,7 @@ function tableHTML(data) {
         html += `<td><div class="list-terca list-week">`;
 
         dados.terca.map(item => {
-            html += ` <span class="train-option">${item}</span>`;
+            html += ` <span class="train-option">${item}<span class="watch-container" onClick="displayCronometer('${_id}','${item}')"><span class="stop-watch-el"></span></span></span>`;
         })
 
         html +=`</td>`;
@@ -496,7 +496,7 @@ function tableHTML(data) {
         html += `<td><div class="list-quarta list-week">`;
 
         dados.quarta.map(item => {
-            html += ` <span class="train-option">${item}</span>`;
+            html += ` <span class="train-option">${item}<span class="watch-container" onClick="displayCronometer('${_id}','${item}')"><span class="stop-watch-el"></span></span></span>`;
         })
 
         html +=`</td>`;
@@ -508,7 +508,7 @@ function tableHTML(data) {
         html += `<td><div class="list-quinta list-week">`;
 
         dados.quinta.map(item => {
-            html += ` <span class="train-option">${item}</span>`;
+            html += ` <span class="train-option">${item}<span class="watch-container" onClick="displayCronometer('${_id}','${item}')"><span class="stop-watch-el"></span></span></span>`;
         })
 
         html +=`</td>`;
@@ -520,7 +520,7 @@ function tableHTML(data) {
         html += `<td><div class="list-sexta list-week">`;
 
         dados.sexta.map(item => {
-            html += ` <span class="train-option">${item}</span>`;
+            html += ` <span class="train-option">${item}<span class="watch-container" onClick="displayCronometer('${_id}','${item}')"><span class="stop-watch-el" onClick="displayCronometer('${_id}', '${item}')"></span></span></span>`;
         })
 
         html +=`</td>`;
@@ -532,7 +532,7 @@ function tableHTML(data) {
         html += `<td><div class="list-sabado list-week">`;
 
         dados.sabado.map(item => {
-            html += ` <span class="train-option">${item}</span>`;
+            html += ` <span class="train-option">${item}<span class="watch-container" onClick="displayCronometer('${_id}','${item}')"><span class="stop-watch-el"></span></span></span>`;
         })
 
         html +=`</td>`;
@@ -849,6 +849,57 @@ function updateTable(id) {
 
 }
 
+//Exibe o cronômetro para determinada atividade do treino
+function displayCronometer(id, name) {
+    console.log(name);
+    document.querySelector('#chronometer').style.display = 'block';
+    document.querySelector('.cr-title').innerHTML = name;
+
+}
+
+dragElement(document.getElementById("chronometer"));
+
+function dragElement(elmnt) {
+  var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+  if (document.getElementById(elmnt.id + "header")) {
+    // if present, the header is where you move the DIV from:
+    document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;
+  } else {
+    // otherwise, move the DIV from anywhere inside the DIV:
+    elmnt.onmousedown = dragMouseDown;
+  }
+
+  function dragMouseDown(e) {
+    e = e || window.event;
+    e.preventDefault();
+    // get the mouse cursor position at startup:
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    document.onmouseup = closeDragElement;
+    // call a function whenever the cursor moves:
+    document.onmousemove = elementDrag;
+  }
+
+  function elementDrag(e) {
+    e = e || window.event;
+    e.preventDefault();
+    // calculate the new cursor position:
+    pos1 = pos3 - e.clientX;
+    pos2 = pos4 - e.clientY;
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    // set the element's new position:
+    elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+    elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+  }
+
+  function closeDragElement() {
+    // stop moving when mouse button is released:
+    document.onmouseup = null;
+    document.onmousemove = null;
+  }
+}
+
 //APP Init functions()
 loadNavListeners();
 loadHome();
@@ -858,80 +909,80 @@ loadHome();
 
 //Cronometro
 // Rebound of this pen https://codepen.io/Tonetete/pen/fzDop
-$(function(){
+// $(function(){
 
-    var t = undefined;
-    var log = $("#log");
-    var cl_thousandths = $("#thousandths");
-    var cl_seconds = $("#seconds");
-    var cl_minutes = $("#minutes");
+//     var t = undefined;
+//     var log = $("#log");
+//     var cl_thousandths = $("#thousandths");
+//     var cl_seconds = $("#seconds");
+//     var cl_minutes = $("#minutes");
 	
-    function showTimer() {
-      if(Number(cl_thousandths.html())%999>0.8){
-        cl_thousandths.html("0.00");
-        printDigit(cl_seconds);
-        if(Number(cl_seconds.html())>59){
-          cl_seconds.html("00");
-          printDigit(cl_minutes);
+//     function showTimer() {
+//       if(Number(cl_thousandths.html())%999>0.8){
+//         cl_thousandths.html("0.00");
+//         printDigit(cl_seconds);
+//         if(Number(cl_seconds.html())>59){
+//           cl_seconds.html("00");
+//           printDigit(cl_minutes);
 
-        }
+//         }
        
-		    }
-   else           cl_thousandths.html((+cl_thousandths.html() + 0.015).toFixed(2));
+// 		    }
+//    else           cl_thousandths.html((+cl_thousandths.html() + 0.015).toFixed(2));
 		
-	  }
+// 	  }
 	
-	  function initTimer() {
-		    t=setInterval(showTimer, 20);
-	  }
+// 	  function initTimer() {
+// 		    t=setInterval(showTimer, 20);
+// 	  }
 
-	  function stopTimer() {
-      clearInterval(t);
-      t=undefined;
-      if($.trim($("#log").html())==''){
-        log.html("<thead><tr><th>Stop Times</th></tr></thead>");
-        log.show();
-      }
-      		log.html(log.html() + "<tr><td>"+cl_minutes.html() +":"+cl_seconds.html()+":"+ cl_thousandths.html()+"</td><td></tr>");
-	  }
+// 	  function stopTimer() {
+//       clearInterval(t);
+//       t=undefined;
+//       if($.trim($("#log").html())==''){
+//         log.html("<thead><tr><th>Stop Times</th></tr></thead>");
+//         log.show();
+//       }
+//       		log.html(log.html() + "<tr><td>"+cl_minutes.html() +":"+cl_seconds.html()+":"+ cl_thousandths.html()+"</td><td></tr>");
+// 	  }
 	
-   function changeTimer() {
-      (!t)?initTimer() : stopTimer();
-   }
-	// Reset chronometer and clean up log.
-   function resetTimer() {
-      if (!t) {
-        cl_thousandths.html("0.00");
-        cl_seconds.html("00");
-        cl_minutes.html("00");
-        log.html("");
-        log.hide();
-      }
-	   }
+//    function changeTimer() {
+//       (!t)?initTimer() : stopTimer();
+//    }
+// 	// Reset chronometer and clean up log.
+//    function resetTimer() {
+//       if (!t) {
+//         cl_thousandths.html("0.00");
+//         cl_seconds.html("00");
+//         cl_minutes.html("00");
+//         log.html("");
+//         log.hide();
+//       }
+// 	   }
 
 	
-	   function printDigit(digit){
+// 	   function printDigit(digit){
      
-      var number = Number(digit.html().replace(/\s+/g, "")) + 1;
-      var numberString;
+//       var number = Number(digit.html().replace(/\s+/g, "")) + 1;
+//       var numberString;
      
-		      (number<10)?numberString="0"+number : numberString=String(number);
+// 		      (number<10)?numberString="0"+number : numberString=String(number);
      
-      if(numberString.substring(1,2)==="1"){
-        if(number<10)
-          digit.html("0 "+number);
-        else
-          digit.html(numberString.split("").join(" "));
-      }
+//       if(numberString.substring(1,2)==="1"){
+//         if(number<10)
+//           digit.html("0 "+number);
+//         else
+//           digit.html(numberString.split("").join(" "));
+//       }
      
-      else{
-        if(number<10)
-          digit.html("0"+number);
-        else
-          digit.html(number);
-      }
-    }
+//       else{
+//         if(number<10)
+//           digit.html("0"+number);
+//         else
+//           digit.html(number);
+//       }
+//     }
 	
-    $("#change").on('click', changeTimer);
-    $("#init").on('click', resetTimer);
-})
+//     $("#change").on('click', changeTimer);
+//     $("#init").on('click', resetTimer);
+// })

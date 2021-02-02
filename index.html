@@ -48,14 +48,23 @@
         <!-- The Magic happens here  -->
       </div>
 
-      <div id="buttons">
-        <a id="change" href=#>Start /  Stop</a>
-        <a href=# id="init">Reset</a>
+     
+        <div id="chronometer">
+          <div class="cr-title">Título do cronometro</div>
+          <div class="cr-display">
+            <span id="minutes">00</span>
+            <span>:</span>
+            <span id="seconds">00</span>
+            <span>:</span>
+            <span id="thousandths">0.00</span>
+          </div>
+          
+        <div id="buttons">
+          <button class="btn-success btn" id="start-cr">Start/STOP</button>
+          <button class="btn-info btn" id="reset-cr">Reset</button>
+          <button class="btn-danger btn" id="close-cr">Close</button>
+        </div>
       </div>
-      <div id="chronometer">
-        <span id="minutes">00</span><span>&nbsp:&nbsp</span><span id="seconds">00</span><span>&nbsp:&nbsp</span><span id="thousandths">0.00</span>
-      </div>
-      <table id="log"></table>
     </div>
 
     <footer class="bg-dark">
