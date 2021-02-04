@@ -1,0 +1,18 @@
+cifras = C D G B E F A 
+aquecimento
+NOMES DE cordas easy
+pestana - treinar
+
+
+escala cromática - do it // escala é um conjunto de notas sucessivas definidas por algum padrão 
+de 1/2 tom
+
+acidentes = #sustenido / p frente  e bmol b/p trás
+
+C#  = Db
+
+- treine achar as notas com escala cromática + som das cordas soltas
+
+treinar os acordes principais 
+si maior com pestana , decorar formatos + velocidade, monta e desmonta
+acordes menores
