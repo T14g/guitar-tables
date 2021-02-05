@@ -1,4 +1,3 @@
-const { MongoServerSelectionError } = require('mongodb');
 const mongoose = require('mongoose');
 
 const treinoSchema = new mongoose.Schema({
@@ -12,7 +11,12 @@ const treinoSchema = new mongoose.Schema({
     json : {
         type: String,
         required: true
-    }
+    },
+
+    tempos : [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Tempo"
+    }]
 },
 {
     timestamps: true
