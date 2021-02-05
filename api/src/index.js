@@ -5,6 +5,7 @@ require('./db/mongoose');
 var cors = require('cors');
 
 const treinoRouter = require('./routers/treinos');
+const tempoRouter = require('./routers/tempos');
 
 const app = express();
 
@@ -14,6 +15,7 @@ const port = process.env.PORT ;
 app.use(cors());
 app.use(express.json());
 app.use(treinoRouter);
+app.use(tempoRouter);
 
 
 app.listen(port, () => {

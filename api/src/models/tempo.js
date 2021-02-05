@@ -1,6 +1,10 @@
 const mongoose = require('mongoose');
 
 const tempoSchemma = new mongoose.Schema({
+    titulo : {
+        type: String,
+        required: true
+    },
     tempo : {
         type: String,
         required: true,

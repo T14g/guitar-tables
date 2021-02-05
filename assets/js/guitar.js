@@ -849,13 +849,16 @@ function updateTable(id) {
 
 }
 
+
+
 //Exibe o cronômetro para determinada atividade do treino
 function displayCronometer(id, name) {
+    
     clearTimeout(t);
-    console.log("fechar");
     crDisplay.textContent = "00:00:00";
     seconds = 0; minutes = 0; hours = 0;
 
+    document.querySelector('#btn-salvar').dataset.id_table = id;
     document.querySelector('#chronometer').style.display = 'block';
     document.querySelector('.cr-title').innerHTML = name;
 
@@ -959,3 +962,40 @@ clearBtn.onclick = function() {
     crDisplay.textContent = "00:00:00";
     seconds = 0; minutes = 0; hours = 0;
 }
+
+
+//Salva um registro de tempo
+
+function saveTime(e){
+    const id_table = e.target.dataset.id_table;
+    const titulo = document.querySelector('.cr-title').innerHTML;
+
+    let data = {
+        titulo: titulo,
+        table_id : id_table,
+        tempo : crDisplay.textContent
+    }
+
+    fetch('http://localhost:3000/tempos',{
+        headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+        },
+        method: "POST",
+        body: JSON.stringify(data)
+    }) 
+    // Handle success
+    .then(response => response.json()) 
+    .then(data =>{  
+        console.log(data);
+    })     
+    .catch(err => console.log('Request Failed', err)); 
+}
+
+
+//Handler do botão salvar
+
+document.querySelector('#btn-salvar').addEventListener('click', function(e){
+    clearTimeout(t);
+    saveTime(e);
+})

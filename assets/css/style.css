@@ -265,7 +265,7 @@ footer p a {
     width: 100%;
     display: block;
     font-size: 10px;
-    max-width: 100px;
+    max-width: 75px;
     margin: 5px auto;
     padding: 3px;
 }
@@ -282,11 +282,34 @@ footer p a {
     color: #000;
     max-width: 100px;
     padding: 2px 10px;
-    margin: 0 auto;
+    margin: 0 auto 15px;
     border-radius: 5px;
     text-align: center;
 }
 
 #chronometer .cr-display span{
     font-size: 14px;
+}
+
+.btn-box-cr{
+    max-width: 160px;
+    margin: 0 auto;
+}
+
+.btn-box-cr::after{
+    display: table;
+    clear: both;
+    content: "";
+}
+
+.btn-box-cr button{
+    float: left;
+}
+
+#btn-salvar{
+    font-size: 12px;
+    max-width: 100px;
+    width: 100%;
+    margin: 0 auto;
+    display: block;
 }
