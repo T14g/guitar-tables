@@ -1,5 +1,6 @@
 const express = require('express');
 const Treino = require('../models/Treino');
+const Tempo = require('../models/tempo');
 const router = new express.Router();
 
 router.post('/treino', async(req, res) => {
@@ -34,8 +35,12 @@ router.get('/treinos/newest', async( req, res) => {
    
    try{
 
-      let ultimo = await Treino.find({}).sort({_id:-1}).limit(1);
-      res.status(200).send(ultimo);
+      let tabela = await Treino.find({}).sort({_id:-1}).limit(1);
+      const tabela_id = tabela[0]._id
+
+      const tempos =  await Tempo.find({ tabela : tabela_id });
+      tabela.tempos = tempos;
+      res.status(200).send(tabela);
 
    } catch (e) {
       console.log(e);
