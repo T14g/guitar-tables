@@ -1,3 +1,12 @@
+//Chronometer stuff
+const   crDisplay = document.querySelector('.cr-display'),
+        startBtn = document.querySelector('#start-cr'),
+        stopBtn = document.querySelector('#stop-cr'),
+        clearBtn = document.querySelector('#clear-cr'),
+        closeBtn = document.querySelector('#close-cr');
+
+let seconds = 0, minutes = 0, hours = 0, t;
+
 //Exibe o cronômetro para determinada atividade do treino
 function displayCronometer(id, name) {
     
@@ -10,6 +19,33 @@ function displayCronometer(id, name) {
     document.querySelector('.cr-title').innerHTML = name;
 
 }
+
+//Adiciona a exibição do crônometro no elemento
+function chronometerHandlers() {
+    const elements = document.querySelectorAll('.watch-container');
+    console.log(elements);
+
+    [...elements].map(el =>{
+        el.onclick = (e) => {
+            let _name = e.target.dataset.nomeItem;
+            let _id  = e.target.dataset.tableId;
+            displayCronometer(_id, _name);
+        }
+    })
+    
+    //Previne o evento de disparar ao click em inner element
+    const innerEls = document.querySelectorAll('.stop-watch-el');
+
+    [...innerEls].map(el => {
+        el.onclick = (e) => {
+            e.stopPropagation();
+            e.target.parentElement.click();
+        }
+    })
+ 
+}
+
+//Torna o cronômetro
 
 dragElement(document.getElementById("chronometer"));
 
@@ -53,16 +89,6 @@ function dragElement(elmnt) {
     document.onmousemove = null;
   }
 }
-
-
-//Chronometer stuff
-var crDisplay = document.querySelector('.cr-display'),
-    startBtn = document.querySelector('#start-cr'),
-    stopBtn = document.querySelector('#stop-cr'),
-    clearBtn = document.querySelector('#clear-cr'),
-    closeBtn = document.querySelector('#close-cr'),
-    seconds = 0, minutes = 0, hours = 0,
-    t;
 
 closeBtn.onclick = function() {
     clearTimeout(t);
@@ -131,6 +157,8 @@ function saveTime(e){
     .then(response => response.json()) 
     .then(data =>{  
         console.log(data);
+        clearBtn.click();
+        closeBtn.click();
     })     
     .catch(err => console.log('Request Failed', err)); 
 }
@@ -142,3 +170,5 @@ document.querySelector('#btn-salvar').addEventListener('click', function(e){
     clearTimeout(t);
     saveTime(e);
 })
+
+export { chronometerHandlers };

@@ -1,5 +1,6 @@
 import { renderDragabbleOptions, allowDrop, drop, deleteElement } from './draggableOptions.js';
 import { getTreinos } from './treino.js';
+import { chronometerHandlers } from './cronometro.js';
 
 //Faz a mágica do drag drop acontecer
 function dragHelper() {
@@ -49,8 +50,9 @@ function tableHTML(data) {
                 Opções
             </button>
             <div class="dropdown-menu">
-            <button class="dropdown-item editar-tabela" data-table-id="${_id}" >Editar</button>
-            <button class="dropdown-item excluir-tabela" data-table-id="${_id}" >Excluir</button>
+                <button class="dropdown-item editar-tabela" data-table-id="${_id}" >Editar</button>
+                <button class="dropdown-item excluir-tabela" data-table-id="${_id}" >Excluir</button>
+                <button class="dropdown-item tempos-tabela" data-table-id="${_id}" >Ver tempo</button>
             </div>
         </div>
     </div>`;
@@ -71,7 +73,7 @@ function tableHTML(data) {
             html += `<td><div class="list-${dia} list-week">`;
             // onClick="displayCronometer('${_id}','${item}')"
             dados[dia].map(item => {
-                html += ` <span class="train-option">${item}<span class="watch-container"><span class="stop-watch-el"></span></span></span>`;
+                html += ` <span class="train-option">${item}<span class="watch-container" data-table-id=${_id} data-nome-item='${item}'><span class="stop-watch-el"></span></span></span>`;
             })
 
         }else{
@@ -267,7 +269,6 @@ function loadTableList() {
     </div>`
 
     document.querySelector('#app-container').innerHTML = html;
-
     getTreinos();
 }
 

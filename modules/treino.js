@@ -1,5 +1,7 @@
 import { tableHTML, tableDataJSON, renderDragTable, loadTableList } from './table.js';
 import { handleTableEdit } from './editTable.js';
+import { chronometerHandlers } from './cronometro.js';
+import { handlersTempo } from './tempos.js';
 
 //Faz um GET retornando os treinos de guitarra se existirem
 function getTreinos() {
@@ -8,7 +10,11 @@ function getTreinos() {
     }) 
     // Handle success
     .then(response => response.json())  // convert to json
-    .then(data => renderListTreinos(data))    //print data to console
+    .then(data => renderListTreinos(data))
+    .then(() => {
+        setTimeout(chronometerHandlers(), 1000);
+        console.log("teste");
+    })    //print data to console
     .catch(err => console.log('Request Failed', err)); // Catch errors
 }
 
@@ -26,7 +32,7 @@ function saveTreino() {
         //Limpa tabela e atualiza a lista de treinos
         clearTreinos();
         loadTableList();
-        
+
     })   
     .catch(err => console.log('Request Failed', err)); // Catch errors
     
@@ -79,13 +85,14 @@ function renderListTreinos (treinos){
 
     document.querySelector('.treino-list-container').innerHTML = html;
     
-    console.log(idsArray);
      //Adiciona event handlers das opções
     if(idsArray.length > 0){
         idsArray.map(id => {
             optionsHelper(id, getTreinos)
         })
     }
+
+    handlersTempo();
    
 }
 
@@ -116,6 +123,9 @@ function renderNewest(treino) {
 
     console.log(treino[0]._id);
     optionsHelper(treino[0]._id, getNewest);
+
+    setTimeout(chronometerHandlers(), 1000);
+    handlersTempo();
 }
 
 //Deleta uma tabela de treino

@@ -20,4 +20,20 @@ router.post('/tempos', async (req,res) =>{
     }
 });
 
+router.get('/tempos/:id', async ( req, res) => {
+    try{
+        const tempos = await Tempo.find({tabela : req.params.id });
+
+        if(!tempos) {
+            res.status(404).send();
+        }
+
+        res.send(tempos);
+        
+    }catch (e) {
+        console.log(e);
+        res.status(400).send(e);
+    }
+});
+
 module.exports = router;
