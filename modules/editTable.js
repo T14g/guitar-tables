@@ -1,4 +1,4 @@
-import {  renderDragTable, loadTableList } from './table.js';
+import { renderDragTable, loadTableList, tableDataJSON } from './table.js';
 import { dragHelper as optionsDragHelper } from './draggableOptions.js';
 //Event handler da edição
 function handleTableEdit(id) {
