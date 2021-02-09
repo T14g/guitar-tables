@@ -29,6 +29,14 @@ const appData = {
         {
             id: 1,
             nome: 'Técnica'
+        },
+        {
+            id: 2,
+            nome: 'Levadas(ritmo, acordes)'
+        },
+        {
+            id: 3,
+            nome: 'Tablatura'
         }
     ],
     Harmonia: [

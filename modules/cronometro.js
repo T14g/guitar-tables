@@ -5,14 +5,12 @@ const   crDisplay = document.querySelector('.cr-display'),
         clearBtn = document.querySelector('#clear-cr'),
         closeBtn = document.querySelector('#close-cr');
 
-let seconds = 0, minutes = 0, hours = 0, t;
+let  timeWorker = null; // initialize variable
 
 //Exibe o cronômetro para determinada atividade do treino
 function displayCronometer(id, name) {
     
-    clearTimeout(t);
     crDisplay.textContent = "00:00:00";
-    seconds = 0; minutes = 0; hours = 0;
 
     document.querySelector('#btn-salvar').dataset.id_table = id;
     document.querySelector('#chronometer').style.display = 'block';
@@ -91,45 +89,61 @@ function dragElement(elmnt) {
 }
 
 closeBtn.onclick = function() {
-    clearTimeout(t);
-    console.log("fechar");
+    timeWorker.terminate();
+    timeWorker = null;
     crDisplay.textContent = "00:00:00";
-    seconds = 0; minutes = 0; hours = 0;
     document.querySelector('#chronometer').style.display = 'none';
 }
 
-function add() {
-    seconds++;
-    if (seconds >= 60) {
-        seconds = 0;
-        minutes++;
-        if (minutes >= 60) {
-            minutes = 0;
-            hours++;
-        }
-    }
-    
-    crDisplay.textContent = (hours ? (hours > 9 ? hours : "0" + hours) : "00") + ":" + (minutes ? (minutes > 9 ? minutes : "0" + minutes) : "00") + ":" + (seconds > 9 ? seconds : "0" + seconds);
 
-    timer();
+// Inicializa o timer
+function startTimer()
+{
+   // First check whether Web Workers are supported
+   if (typeof(Worker)!=="undefined"){
+      // Check whether Web Worker has been created. If not, create a new Web Worker based on the Javascript file simple-timer.js
+      if (timeWorker==null){
+         timeWorker = new Worker("./workers/timeWorker.js");
+      }
+      // Update timer div with output from Web Worker
+      timeWorker.onmessage = function (event) {
+        crDisplay.innerHTML = event.data;
+      };
+   } else {
+      // Web workers are not supported by your browser
+      crDisplay.innerHTML = "Sorry, your browser does not support Web Workers ...";
+   }
+
+   console.log('iniciou');
 }
-function timer() {
-    t = setTimeout(add, 1000);
+
+
+//Stop no timer
+function stopTimer() {
+    timeWorker.terminate();
+    timeWorker = null;
 }
 
 
 /* Start button */
-startBtn.onclick = timer;
+startBtn.onclick = startTimer;
 
 /* Stop button */
 stopBtn.onclick = function() {
-    clearTimeout(t);
+    stopTimer();
 }
 
 /* Clear button */
 clearBtn.onclick = function() {
     crDisplay.textContent = "00:00:00";
-    seconds = 0; minutes = 0; hours = 0;
+
+    //Se estiver rodando
+    if(timeWorker){
+        timeWorker.terminate();
+        timeWorker = null;
+        startTimer();
+    }
+    
 }
 
 
@@ -167,7 +181,8 @@ function saveTime(e){
 //Handler do botão salvar
 
 document.querySelector('#btn-salvar').addEventListener('click', function(e){
-    clearTimeout(t);
+    timeWorker.terminate();
+    timeWorker = null;
     saveTime(e);
 })
 
