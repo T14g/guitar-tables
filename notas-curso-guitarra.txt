@@ -41,3 +41,35 @@ Monta e desmonta para speed
 Treinar a troca
 Foco nas difíceis
 Elimine as easy
+
+
+## Intervalos = distância entre notas
+Escala cromática contem todos os sons que o nosso ouvido pode apreciar
+
+Tônica = nota principal que da nome a escala ou acorde
+
+##Guitar tools icon
+Somar +7 ou diminuir 7
+
+(medido a partir do T)
+Draw this 
+T 2m 2M 3m 4M 4justa 4aumentada# 5 justa 6m 6M 7m 7M 8(justa se tiver)
+
+Decore todos os intervalos da escala 9m = 2m a diferença é que a 9 é oitavada
+
+Tabela de intervalos resumo   (Cifra)
+Tonica (T)
+2m (2b)
+2M (2)
+3m (3b)
+3M (3)
+4justa (4)
+4#aumentada (4#)
+5justa (5)
+6m (6b)
+6M
+7m
+7M
+8justa
+
+Criar a tabela de intervalos

@@ -108,6 +108,12 @@ const appData = {
             id: 4,
             nome: 'Livre/Leitura'
         },
+    ],
+    Cursos : [
+        {
+            id: 1,
+            nome: 'Guitar extreme'
+        }
     ]
 }
 

@@ -10,6 +10,8 @@ let  timeWorker = null; // initialize variable
 //Exibe o cronômetro para determinada atividade do treino
 function displayCronometer(id, name) {
     
+    stopTimer();
+
     crDisplay.textContent = "00:00:00";
 
     document.querySelector('#btn-salvar').dataset.id_table = id;
@@ -89,8 +91,7 @@ function dragElement(elmnt) {
 }
 
 closeBtn.onclick = function() {
-    timeWorker.terminate();
-    timeWorker = null;
+    stopTimer();
     crDisplay.textContent = "00:00:00";
     document.querySelector('#chronometer').style.display = 'none';
 }
@@ -114,14 +115,16 @@ function startTimer()
       crDisplay.innerHTML = "Sorry, your browser does not support Web Workers ...";
    }
 
-   console.log('iniciou');
+ 
 }
 
 
 //Stop no timer
 function stopTimer() {
-    timeWorker.terminate();
-    timeWorker = null;
+    if(timeWorker){
+        timeWorker.terminate();
+        timeWorker = null;
+    }
 }
 
 
@@ -137,10 +140,9 @@ stopBtn.onclick = function() {
 clearBtn.onclick = function() {
     crDisplay.textContent = "00:00:00";
 
-    //Se estiver rodando
+    stopTimer();
+    //Restart if already started
     if(timeWorker){
-        timeWorker.terminate();
-        timeWorker = null;
         startTimer();
     }
     
