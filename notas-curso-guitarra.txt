@@ -73,3 +73,7 @@ Tonica (T)
 8justa
 
 Criar a tabela de intervalos
+
+
+##Somar tempos
+##Adicionar configurações
