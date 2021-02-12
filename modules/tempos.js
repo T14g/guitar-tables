@@ -11,8 +11,9 @@ function getTempos(tabela) {
             const tempos = totalTime(data);
             const html = formatHTML(tempos);
             const title = "Tempos registrados";
-
-            setModalContent(title, html);
+            const preContent = tableTotalTime(data);
+            
+            setModalContent(title, preContent, html);
             blockScroll();
             showModal();
         })
@@ -85,9 +86,6 @@ function somarTempo(initial, summ) {
     const summSplit = summ.split(':');
     let h, m, s, result;
 
-    console.log(initialSplit);
-    console.log(summSplit);
-
     h = parseInt(initialSplit[0]) + parseInt(summSplit[0]);
     m = parseInt(initialSplit[1]) + parseInt(summSplit[1]);
     s = parseInt(initialSplit[2]) + parseInt(summSplit[2]);
@@ -122,5 +120,20 @@ function extraZero(number) {
 
     return numberStr;
 }
+
+//Retorna o tempo total registrado na tabela
+function tableTotalTime(data) {
+    let timers = totalTime(data);
+    let result = "00:00:00";
+
+    if(timers.length > 0){
+        timers.map(item => {
+            result = somarTempo(result, item.tempo);
+        })
+    }
+    
+    return 'Tempo total: ' + result;
+}
+
 
 export { getTempos, handlersTempo };

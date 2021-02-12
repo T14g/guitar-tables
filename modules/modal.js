@@ -19,9 +19,10 @@ function unlockScroll() {
 }
 
 //Adiciona o conteúdo da modal
-function setModalContent(title, html) {
+function setModalContent(title, preContent , html) {
 
     document.querySelector('.custom-modal-title').innerHTML = title;
+    document.querySelector('.custom-modal-precontent').innerHTML = preContent;
     document.querySelector('.custom-modal-content-inner').innerHTML = html;
 
 }
@@ -30,6 +31,7 @@ function setModalContent(title, html) {
 function clearModalContent() {
 
     document.querySelector('.custom-modal-title').innerHTML = "";
+    document.querySelector('.custom-modal-precontent').innerHTML = "";
     document.querySelector('.custom-modal-content-inner').innerHTML = "";
 
 }

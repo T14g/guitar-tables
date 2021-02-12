@@ -183,8 +183,6 @@ function saveTime(e){
 //Handler do botão salvar
 
 document.querySelector('#btn-salvar').addEventListener('click', function(e){
-    timeWorker.terminate();
-    timeWorker = null;
     saveTime(e);
 })
 

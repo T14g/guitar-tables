@@ -77,3 +77,7 @@ Criar a tabela de intervalos
 
 ##Somar tempos
 ##Adicionar configurações
+
+
+Montar escalas usando 5o grau e cromática de meio em meio e 1 em 1 intervalo
+Maiores com b = 4 grau
