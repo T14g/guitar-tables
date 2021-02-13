@@ -12,7 +12,7 @@ function displayCronometer(id, name) {
     
     stopTimer();
 
-    crDisplay.textContent = "00:00:00";
+    document.querySelector('#cr-time').value = "00:00:00"
 
     document.querySelector('#btn-salvar').dataset.id_table = id;
     document.querySelector('#chronometer').style.display = 'block';
@@ -45,11 +45,17 @@ function chronometerHandlers() {
  
 }
 
-//Torna o cronômetro
+
+document.querySelector('#cr-time').addEventListener('click',function(e){
+    document.querySelector('#cr-time').value = prompt("Digite o tempo no formato xx:xx:xx");
+});
+
+//Torna o cronômetro móvel
 
 dragElement(document.getElementById("chronometer"));
 
 function dragElement(elmnt) {
+
   var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
   if (document.getElementById(elmnt.id + "header")) {
     // if present, the header is where you move the DIV from:
@@ -92,7 +98,7 @@ function dragElement(elmnt) {
 
 closeBtn.onclick = function() {
     stopTimer();
-    crDisplay.textContent = "00:00:00";
+    document.querySelector('#cr-time').value = "00:00:00";
     document.querySelector('#chronometer').style.display = 'none';
 }
 
@@ -108,11 +114,11 @@ function startTimer()
       }
       // Update timer div with output from Web Worker
       timeWorker.onmessage = function (event) {
-        crDisplay.innerHTML = event.data;
+        document.querySelector('#cr-time').value = event.data;
       };
    } else {
       // Web workers are not supported by your browser
-      crDisplay.innerHTML = "Sorry, your browser does not support Web Workers ...";
+      document.querySelector('#cr-time').value = "Error"
    }
 
  
@@ -138,7 +144,7 @@ stopBtn.onclick = function() {
 
 /* Clear button */
 clearBtn.onclick = function() {
-    crDisplay.textContent = "00:00:00";
+    document.querySelector('#cr-time').value = "00:00:00";
 
     stopTimer();
     //Restart if already started
@@ -154,11 +160,12 @@ clearBtn.onclick = function() {
 function saveTime(e){
     const id_table = e.target.dataset.id_table;
     const titulo = document.querySelector('.cr-title').innerHTML;
+    const tempo = document.querySelector('#cr-time').value;
 
     let data = {
         titulo: titulo,
         table_id : id_table,
-        tempo : crDisplay.textContent
+        tempo : tempo
     }
 
     fetch('http://localhost:3000/tempos',{

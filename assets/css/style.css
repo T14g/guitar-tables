@@ -232,7 +232,7 @@ footer p a {
     cursor: pointer;
 }
 
-#chronometer{
+#chronometer, #chronometer-fixed{
     padding: 20px;
     border: 10px solid #14181b;
     border-radius: 50%;
@@ -247,7 +247,7 @@ footer p a {
     cursor: pointer;
 }
 
-#chronometer::after{
+#chronometer::after , #chronometer-fixed::after{
     position: absolute;
     top: 0;
     background: #14181b;
@@ -259,7 +259,7 @@ footer p a {
     transform: translateX(-50%);
 }
 
-#chronometer button{
+#chronometer button , #chronometer-fixed button{
     width: 100%;
     display: block;
     font-size: 10px;
@@ -268,14 +268,14 @@ footer p a {
     padding: 3px;
 }
 
-#chronometer .cr-title{
+#chronometer .cr-title,  #chronometer-fixed .cr-title{
     font-size: 12px;
     max-width: 205px;
     margin: 25px auto 10px;
     text-align: center;
 }
 
-#chronometer .cr-display{
+#chronometer .cr-display, #chronometer-fixed .cr-display{
     background: #fff;
     color: #000;
     max-width: 100px;
@@ -285,7 +285,7 @@ footer p a {
     text-align: center;
 }
 
-#chronometer .cr-display span{
+#chronometer .cr-display span, #chronometer-fixed .cr-display span{
     font-size: 14px;
 }
 
@@ -310,4 +310,10 @@ footer p a {
     width: 100%;
     margin: 0 auto;
     display: block;
+}
+
+#cr-time{
+    width: 100%;
+    border: none;
+    text-align: center;
 }
