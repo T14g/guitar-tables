@@ -19,5 +19,6 @@
   "homepage": "https://github.com/T14g/guitar-tables#readme",
   "dependencies": {
     "http-server": "^0.12.3"
-  }
+  },
+  "devDependencies": {}
 }

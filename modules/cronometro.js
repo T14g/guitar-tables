@@ -50,6 +50,10 @@ document.querySelector('#cr-time').addEventListener('click',function(e){
     document.querySelector('#cr-time').value = prompt("Digite o tempo no formato xx:xx:xx");
 });
 
+document.querySelector('.cr-title').addEventListener('click',function(e){
+    document.querySelector('.cr-title').innerHTML = prompt("Digite o título do treino:");
+});
+
 //Torna o cronômetro móvel
 
 dragElement(document.getElementById("chronometer"));

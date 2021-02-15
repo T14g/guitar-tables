@@ -317,3 +317,8 @@ footer p a {
     border: none;
     text-align: center;
 }
+
+#chronometer .cr-title:hover{
+    border:1px #fff solid;
+    max-width: 150px;
+}
