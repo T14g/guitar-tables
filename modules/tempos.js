@@ -1,5 +1,7 @@
 import { showModal, setModalContent, blockScroll } from './modal.js';
 
+let temposData = null;
+
 //Retorna os tempos de uma tabela
 function getTempos(tabela) {
     fetch('http://localhost:3000/tempos/' + tabela, {
@@ -8,6 +10,7 @@ function getTempos(tabela) {
         // Handle success
         .then(response => response.json())
         .then(data => {
+            temposData = data;
             const tempos = totalTime(data);
             const html = formatHTML(tempos);
             const title = "Tempos registrados";
@@ -43,7 +46,7 @@ function formatHTML(data) {
     console.log(data);
     if (data.length > 0) {
         data.map(el => {
-            html += `<li><span class="titulo-treino">${el.nome} - Tempo: ${el.tempo}</span></li>`
+            html += `<li><span class="titulo-treino">${el.titulo} - Tempo: ${el.tempo}</span></li>`
         })
     }
 
@@ -71,7 +74,7 @@ function totalTime(data) {
     let results = [];
 
     keys.map(key => {
-        let obj = { nome: key, tempo: tempos[key] };
+        let obj = { titulo: key, tempo: tempos[key] };
         results.push(obj);
     });
 
@@ -135,5 +138,21 @@ function tableTotalTime(data) {
     return 'Tempo total: ' + result;
 }
 
+//Handler que exibe detalhes dos tempos
+document.querySelector('.custom-btn-detalhes').addEventListener('click', () => { 
+    const html = formatHTML(temposData);
+    const title = "Tempos registrados";
+    const preContent = tableTotalTime(temposData);
+    setModalContent(title, preContent, html);
+})
+
+//Handler que exibe o total dos tempos
+document.querySelector('.custom-btn-totals').addEventListener('click', () => { 
+    const tempos = totalTime(temposData);
+    const html = formatHTML(tempos);
+    const title = "Tempos registrados";
+    const preContent = tableTotalTime(temposData);
+    setModalContent(title, preContent, html);
+})
 
 export { getTempos, handlersTempo };
