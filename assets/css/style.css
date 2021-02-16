@@ -1,3 +1,7 @@
+body{
+    position: relative;
+}
+
 header nav{
     background-color: #212529;
 }
