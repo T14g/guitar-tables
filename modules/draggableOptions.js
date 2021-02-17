@@ -1,5 +1,7 @@
 import appData from './dados.js';
 import { biggestIndex } from './utils.js';
+import { getTiposTreino } from './tipo.js';
+
 
 //Helper das drapOptions
 function dragHelper() {
@@ -13,30 +15,24 @@ function dragHelper() {
 }
 
 //Renderiza opções draggable para montar seu treino
-function renderDragabbleOptions () {
-
-    let categories = Object.keys(appData);
-    let html = '';
-    let dragOptions = [];
+const renderDragabbleOptions = async () => {
     let count = 1;
+    let html = '';
 
-    categories.map(cat=>{
-        if(appData[cat].length > 0 ){
-            dragOptions = [...dragOptions, ...appData[cat]];
+    getTiposTreino().then( data => {
+
+        if(data.length > 0){
+            data.map(option =>{
+                html += '<span id="elemento-' + count + '" draggable="true" class="train-option">' + option.name + '</span>';
+                count++;
+            })
+
+            document.querySelector('.opcoes-disponiveis').innerHTML = html;
+            dragHelper();
         }
-    })
-
-    dragOptions.map(option =>{
-        html += '<span id="elemento-' + count + '" draggable="true" class="train-option">' + option.nome + '</span>';
-        count++;
-    })
-
-
-    document.querySelector('.opcoes-disponiveis').innerHTML = html;
-
-    dragHelper();
+    });
 }
-
+ 
 //Helper 
 function allowDrop(ev) {
     ev.preventDefault();
