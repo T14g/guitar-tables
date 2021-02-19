@@ -6,15 +6,15 @@ function myTimer(d0)
 {
    // get current time
    let d=(new Date()).valueOf();
-   // calculate time difference between now and initial time
+   // calculate time diffference between now and initial time
    let diff = d-d0;
+   // diff = 3600000;
    // calculate number of hours
    let hours = Math.floor(diff/1000/60/60);
    // calculate number of minutes
-   let minutes = Math.floor(diff/1000/60) - hours*60*60;
+   let minutes = Math.floor((diff - hours*1000*60*60)/1000/60);
    // calculate number of seconds
-   let seconds =( Math.floor(diff/1000) - hours*60*60) -minutes*60;
-   let myVar = null;
+   let seconds = Math.floor((diff - hours*1000*60*60 - minutes*1000*60)/1000);
 
    // if number of hours less than 10, add a leading "0"
    hours = hours.toString();
@@ -35,6 +35,7 @@ function myTimer(d0)
 
    // return output to Web Worker
    postMessage(hours + ":" + minutes+":"+seconds);
+   
 }
                
 if (timerStart){
