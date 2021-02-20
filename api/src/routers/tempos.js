@@ -16,9 +16,24 @@ router.post('/tempos', async (req,res) =>{
         res.status(201).send(tempo);
     } catch (e) {
         console.log(e);
-        res.status(400).send(e);
+        res.status(500).send(e);
     }
 });
+
+router.get('/tempos', async( req, res) => {
+    try {
+        const tempos = await Tempo.find({});
+
+        if(!tempos) {
+            res.status(404).send();
+        }
+
+        res.send(tempos);
+
+    }catch (e) {
+        res.status(500).send(e);
+    }
+})
 
 router.get('/tempos/:id', async ( req, res) => {
     try{
@@ -32,7 +47,7 @@ router.get('/tempos/:id', async ( req, res) => {
         
     }catch (e) {
         console.log(e);
-        res.status(400).send(e);
+        res.status(500).send(e);
     }
 });
 

@@ -14,7 +14,7 @@ function getTempos(tabela) {
             const tempos = totalTime(data);
             const html = formatHTML(tempos);
             const title = "Tempos registrados";
-            const preContent = tableTotalTime(data);
+            const preContent = 'Tempo total: ' + sumAllTimers(data);
             
             setModalContent(title, preContent, html);
             blockScroll();
@@ -61,11 +61,10 @@ function totalTime(data) {
 
     if (data.length > 0) {
         data.map(item => {
-            console.log(item.titulo)
             if (!(item.titulo in tempos)) {
                 tempos[item.titulo] = item.tempo;
             } else {
-                tempos[item.titulo] = somarTempo(tempos[item.titulo], item.tempo);
+                tempos[item.titulo] = sumTwoTimers(tempos[item.titulo], item.tempo);
             }
         })
     }
@@ -83,7 +82,7 @@ function totalTime(data) {
 }
 
 //Soma o tempo em h,m,s e retorna uma string do tempo
-function somarTempo(initial, summ) {
+function sumTwoTimers(initial, summ) {
 
     const initialSplit = initial.split(':');
     const summSplit = summ.split(':');
@@ -124,25 +123,42 @@ function extraZero(number) {
     return numberStr;
 }
 
-//Retorna o tempo total registrado na tabela
-function tableTotalTime(data) {
+//Retorna a soma de todos os tempos
+function sumAllTimers(data) {
     let timers = totalTime(data);
     let result = "00:00:00";
 
     if(timers.length > 0){
         timers.map(item => {
-            result = somarTempo(result, item.tempo);
+            result = sumTwoTimers(result, item.tempo);
         })
     }
     
-    return 'Tempo total: ' + result;
+    return result;
+}
+
+//Retorna todos os registros de tempo 
+function getAllTimers () {
+    fetch('http://localhost:3000/tempos/',{
+        method: "GET"
+    })
+        // Handle success
+        .then(response => response.json())
+        .then(data => {
+            const tempoTotal = sumAllTimers(data);
+            const tempoParts = tempoTotal.split(':');
+
+            alert(`Você já tocou ${tempoParts[0]} horas , ${tempoParts[1]} minutos e ${tempoParts[2]} segundos!`);
+           
+        })
+        .catch(err => console.log('Request Failed', err));
 }
 
 //Handler que exibe detalhes dos tempos
 document.querySelector('.custom-btn-detalhes').addEventListener('click', () => { 
     const html = formatHTML(temposData);
     const title = "Tempos registrados";
-    const preContent = tableTotalTime(temposData);
+    const preContent = 'Tempo total: ' + sumAllTimers(temposData);
     setModalContent(title, preContent, html);
 })
 
@@ -151,8 +167,12 @@ document.querySelector('.custom-btn-totals').addEventListener('click', () => {
     const tempos = totalTime(temposData);
     const html = formatHTML(tempos);
     const title = "Tempos registrados";
-    const preContent = tableTotalTime(temposData);
+    const preContent = 'Tempo total: ' + sumAllTimers(temposData);
     setModalContent(title, preContent, html);
+})
+
+document.querySelector('.botao-tempos').addEventListener('click', () => { 
+    getAllTimers();
 })
 
 export { getTempos, handlersTempo };
