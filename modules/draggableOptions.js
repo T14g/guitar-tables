@@ -1,6 +1,6 @@
 import appData from './dados.js';
 import { biggestIndex } from './utils.js';
-import { getTiposTreino } from './tipo.js';
+import { getTiposTreino, newTipoHandler } from './tipo.js';
 
 
 //Helper das drapOptions
@@ -26,10 +26,12 @@ const renderDragabbleOptions = async () => {
                 html += '<span id="elemento-' + count + '" draggable="true" class="train-option">' + option.name + '</span>';
                 count++;
             })
-
-            document.querySelector('.opcoes-disponiveis').innerHTML = html;
-            dragHelper();
         }
+
+        html += '<button class="btn btn-success add-new-tipo">Adicionar</button>';
+        document.querySelector('.opcoes-disponiveis').innerHTML = html;
+        dragHelper();
+        newTipoHandler();
     });
 }
  

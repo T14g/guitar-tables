@@ -1,4 +1,5 @@
 import appData from "./dados.js";
+import { renderDragabbleOptions } from './draggableOptions.js';
 
 const createTipoTreino = async (category, name) => {
 
@@ -13,6 +14,7 @@ const createTipoTreino = async (category, name) => {
     })
     
 }
+
 function bulkADDTipos () {
     console.log('bulk add');
     let categories = Object.keys(appData);
@@ -37,9 +39,16 @@ const getTiposTreino = async () => {
     return result;
 }
 
+function newTipoHandler(){
+    document.querySelector('.add-new-tipo').addEventListener('click', function(e){
+        
+        let data = prompt("Digite a categoria e o nome do tipo de treino. ex Acordes;menores");
+        let parts = data.split(';');
 
+        createTipoTreino(parts[0], parts[1]).then(()=>{
+            renderDragabbleOptions();
+        })
+    })
+}
 
-
-
-
-export { createTipoTreino, getTiposTreino };
+export { createTipoTreino, getTiposTreino, newTipoHandler };

@@ -332,3 +332,12 @@ footer p a {
     border: none;
     text-align: center;
 }
+
+.add-new-tipo{
+    border: none;
+    float: left;
+    padding: 10px;
+    font-size: 14px;
+    border-radius: 0;
+    font-weight: 600;
+}
