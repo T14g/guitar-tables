@@ -148,7 +148,7 @@ function getAllTimers () {
             const tempoTotal = sumAllTimers(data);
             const tempoParts = tempoTotal.split(':');
 
-            alert(`Você já tocou ${tempoParts[0]} horas , ${tempoParts[1]} minutos e ${tempoParts[2]} segundos!`);
+            alert(`Você já treinou ${tempoParts[0]} horas , ${tempoParts[1]} minutos e ${tempoParts[2]} segundos!`);
            
         })
         .catch(err => console.log('Request Failed', err));

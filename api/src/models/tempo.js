@@ -15,6 +15,9 @@ const tempoSchemma = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "Treino"
     }
+},
+{
+    timestamps: true
 })
 
 const tempo = mongoose.model('Tempo', tempoSchemma);

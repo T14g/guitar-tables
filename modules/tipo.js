@@ -13,7 +13,6 @@ const createTipoTreino = async (category, name) => {
     })
     
 }
-
 function bulkADDTipos () {
     console.log('bulk add');
     let categories = Object.keys(appData);
