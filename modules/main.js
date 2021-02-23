@@ -24,7 +24,6 @@ document.querySelector('.botao-listar').addEventListener('click', function(event
     loadTableList();
 })
 
-// getTempos("601624dedf11f42424c8df70");
 
 
 

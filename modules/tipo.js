@@ -10,7 +10,6 @@ const createTipoTreino = async (category, name) => {
         headers: {"Content-type": "application/json; charset=UTF-8"}
     }).then(result =>{
         console.log(result);
-        console.log("enviando post com name " + name);
     })
     
 }
@@ -34,8 +33,6 @@ const getTiposTreino = async () => {
         method: "GET",
         headers: {"Content-type": "application/json; charset=UTF-8"}
     })
-    .then(response => response.json()) 
-
     return result;
 }
 
