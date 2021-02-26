@@ -32,7 +32,8 @@ const getTiposTreino = async () => {
     const result = await fetch('http://localhost:3000/tipo/',{
         method: "GET",
         headers: {"Content-type": "application/json; charset=UTF-8"}
-    })
+    }).then(response => response.json()) 
+    
     return result;
 }
 
