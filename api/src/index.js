@@ -7,6 +7,7 @@ var cors = require('cors');
 const treinoRouter = require('./routers/treinos');
 const tempoRouter = require('./routers/tempos');
 const tipoRouter = require('./routers/tipo');
+const acordeRouter = require('./routers/acordes');
 
 const app = express();
 
@@ -18,6 +19,7 @@ app.use(express.json());
 app.use(treinoRouter);
 app.use(tempoRouter);
 app.use(tipoRouter);
+app.use(acordeRouter);
 
 
 app.listen(port, () => {
