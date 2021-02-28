@@ -11,14 +11,15 @@
     "type": "git",
     "url": "git+https://github.com/T14g/guitar-tables.git"
   },
-  "author": "",
+  "author": "T14g",
+  "type": "module",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/T14g/guitar-tables/issues"
   },
   "homepage": "https://github.com/T14g/guitar-tables#readme",
   "dependencies": {
+    "axios": "^0.21.1",
     "http-server": "^0.12.3"
-  },
-  "devDependencies": {}
+  }
 }
