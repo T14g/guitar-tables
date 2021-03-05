@@ -1,8 +1,8 @@
-export default class TreinosView{
+export default class TreinosView {
 
-    constructor (rootElement) {
-        this.app  = this.getElement(rootElement);
-        this.days = ['domingo','segunda', 'terca', 'quarta', 'quinta', 'sexta', 'sabado'];
+    constructor(rootElement) {
+        this.app = this.getElement(rootElement);
+        this.days = ['domingo', 'segunda', 'terca', 'quarta', 'quinta', 'sexta', 'sabado'];
     }
 
     getElement(el) {
@@ -11,7 +11,7 @@ export default class TreinosView{
     }
 
     tableHTML(table) {
-        
+
         const treinos = JSON.parse(table.json);
         console.log(treinos);
 
@@ -31,32 +31,32 @@ export default class TreinosView{
 
         html += `<table class="table table-listagem">`;
         html += `<thead class="thead-dark"><tr>`;
-    
+
         this.days.map(dia => {
             html += `<th>${dia}</th>`;
         })
-    
+
         html += `</tr>`;
         html += `</thead><tbody><tr>`;
 
         this.days.map(dia => {
-            if(treinos[dia] && treinos[dia].length > 0) {
-    
+            if (treinos[dia] && treinos[dia].length > 0) {
+
                 html += `<td><div class="list-${dia} list-week">`;
 
                 treinos[dia].map(item => {
                     html += ` <span class="train-option">${item}<span class="watch-container" data-table-id=${table._id} data-nome-item='${item}'><span class="stop-watch-el"></span></span></span>`;
                 })
-    
-            }else{
+
+            } else {
                 html += `<td><div class="list-${dia}"></div></td>`;
             }
         })
-    
+
         html += `</tr>`;
         html += `</tbody>`;
         html += `</table>`;
-    
+
         return html;
     }
 

@@ -18,8 +18,8 @@ export default class TreinosModel {
                 this.treinos = treinos;
                 return treinos;
             })
-        
-            return await result;
+
+        return await result;
     }
 
     getNewest = async () => {
@@ -27,10 +27,6 @@ export default class TreinosModel {
             .then((response) => {
                 let newest = response.data[0];
                 this.newest = newest;
-
-                const cronometer  = new CronometerController(new CronometerModel('Cronometro de teste'));
-                newest.cronometer = cronometer;
-
                 return newest;
             })
 

@@ -9,8 +9,8 @@ export default class Tables {
 
     getAllTables = () => {
         axios.get('http://localhost:3000/treinos')
-        .then((response)=>{
-            this.tableList = response.data;
-        })
+            .then((response) => {
+                this.tableList = response.data;
+            })
     }
 }
