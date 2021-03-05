@@ -2,12 +2,59 @@ export default class CronometerView {
 
     constructor(rootElement) {
         this.app = this.getElement(rootElement);
+        this.cronometerElement = null;
+        this.pos1 = 0;
+        this.pos2 = 0;
+        this.pos3 = 0;
+        this.pos4 = 0;
     }
 
     getElement(el) {
         const element = document.querySelector(el);
         return element;
     }
+
+    dragMouseDown = (e) => {
+        e = e || window.event;
+        e.preventDefault();
+        // get the mouse cursor position at startup:
+        this.pos3 = e.clientX;
+        this.pos4 = e.clientY;
+        document.onmouseup = this.closeDragElement;
+        // call a function whenever the cursor moves:
+        document.onmousemove = this.elementDrag;
+    }
+
+    elementDrag = (e) => {
+        e = e || window.event;
+        e.preventDefault();
+        // calculate the new cursor position:
+        this.pos1 = this.pos3 - e.clientX;
+        this.pos2 = this.pos4 - e.clientY;
+        this.pos3 = e.clientX;
+        this.pos4 = e.clientY;
+        // set the element's new position:
+        this.cronometerElement.style.top = (this.cronometerElement.offsetTop - this.pos2) + "px";
+        this.cronometerElement.style.left = (this.cronometerElement.offsetLeft - this.pos1) + "px";
+    }
+
+    closeDragElement = () => {
+        // stop moving when mouse button is released:
+        document.onmouseup = null;
+        document.onmousemove = null;
+    }
+
+    dragElement = (elmnt) => {
+
+        if (document.getElementById(elmnt.id + "header")) {
+            // if present, the header is where you move the DIV from:
+            document.getElementById(elmnt.id + "header").onmousedown = this.dragMouseDown;
+        } else {
+            // otherwise, move the DIV from anywhere inside the DIV:
+            elmnt.onmousedown = this.dragMouseDown;
+        }
+    }
+
 
     cronometerHTML(data) {
 
@@ -36,9 +83,14 @@ export default class CronometerView {
     }
 
     renderCronometer() {
+
         let data = { name: 'Cronometer Name' };
         const html = this.cronometerHTML(data);
         this.app.insertAdjacentHTML('afterend', html);
+
+        this.cronometerElement = this.getElement('#chronometer');
+        this.dragElement(this.cronometerElement);
+
     }
 
 }
