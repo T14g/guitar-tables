@@ -1,4 +1,11 @@
-import Tables from './models/tables.js';
+import TreinosModel from './models/treinos.js';
+import TreinosView from './views/treinos.js';
+import TreinosController from './controllers/treinos.js';
+import CronometerModel from './models/cronometer.js';
+import CronometerView from './views/cronometer.js';
+import CronometerController from './controllers/cronometer.js';
 
-const tables = new Tables();
-tables.getAllTables();
+const APP_CONTAINER = '#appContainer';
+const TREINOS = new TreinosController(new TreinosModel(), new TreinosView(APP_CONTAINER));
+const CRONOMETER = new CronometerController(new CronometerModel(), new CronometerView(APP_CONTAINER));
+

@@ -1,8 +1,8 @@
 export default class CronometerController{
 
-    constructor(view, model) {
-        this.view = view;
+    constructor(model, view) {
         this.model = model;
+        this.view = view;
+        // this.view.renderCronometer();
     }
-
 }

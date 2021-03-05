@@ -1,7 +1,6 @@
 export default class CronometerModel{
 
-    constructor(name) {
-        this.name = name;
+    constructor() {
         this.time = '00:00:00';
     }
 
