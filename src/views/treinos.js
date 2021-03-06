@@ -1,43 +1,13 @@
 export default class TreinosView {
 
-    constructor(rootElement, cronometerView) {
+    constructor(rootElement) {
         this.app = this.getElement(rootElement);
         this.days = ['domingo', 'segunda', 'terca', 'quarta', 'quinta', 'sexta', 'sabado'];
-        this.cronometerView = cronometerView;
     }
 
     getElement(el) {
         const element = document.querySelector(el);
         return element;
-    }
-
-    cronometerEventsHandler() {
-        const elements = document.querySelectorAll('.watch-container');
-
-        [...elements].map(el => {
-            el.onclick = (e) => {
-
-                let _name = e.target.dataset.nomeItem;
-                let _id = e.target.dataset.tableId;
-                let treino = { name: _name, id: _id };
-                this.cronometerView.showCronometer(treino);
-
-            }
-        })
-
-        this.cronometerStopPropagation();
-    }
-
-    cronometerStopPropagation() {
-
-        const innerEls = document.querySelectorAll('.stop-watch-el');
-
-        [...innerEls].map(el => {
-            el.onclick = (e) => {
-                e.stopPropagation();
-                e.target.parentElement.click();
-            }
-        })
     }
 
     tableHTML(table) {
@@ -95,6 +65,5 @@ export default class TreinosView {
 
     renderNewest(data) {
         this.render(this.tableHTML(data));
-        this.cronometerEventsHandler();
     }
 }

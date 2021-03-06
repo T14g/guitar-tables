@@ -7,5 +7,5 @@ import CronometerController from './controllers/cronometer.js';
 
 const APP_CONTAINER = '#appContainer';
 const CRONOMETER = new CronometerController(new CronometerModel(), new CronometerView(APP_CONTAINER));
-const TREINOS = new TreinosController(new TreinosModel(), new TreinosView(APP_CONTAINER, CRONOMETER.view));
+const TREINOS = new TreinosController(new TreinosModel(), new TreinosView(APP_CONTAINER), CRONOMETER);
 

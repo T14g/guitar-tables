@@ -7,6 +7,10 @@ export default class CronometerController {
         this.initHandlers();
     }
 
+    onShowCronometer = (treino) => {
+        this.view.showCronometer(treino);
+    }
+
     onInitTimer = () => {
         this.model.createTimeWorker();
         this.model.timeWorker.onmessage = (event) => {
