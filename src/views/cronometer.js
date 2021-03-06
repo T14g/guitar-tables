@@ -18,6 +18,14 @@ export default class CronometerView {
         this.getElement('.cr-title').innerHTML = name;
     }
 
+    updateTime = (time) => {
+        this.getElement('#cr-time').value = time;
+    }
+
+    resetTime = () =>{
+        this.getElement('#cr-time').value = '00:00:00';
+    }
+
     showCronometer = (treino) => {
         this.updateCronometerName(treino.name);
         this.cronometerElement.style.display = 'block';

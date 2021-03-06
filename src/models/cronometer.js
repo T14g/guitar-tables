@@ -1,7 +1,6 @@
 export default class CronometerModel {
 
     constructor() {
-        this.time = '00:00:00';
         this.timeWorker = null;
     }
 
@@ -10,5 +9,11 @@ export default class CronometerModel {
             if (this.timeWorker==null) this.timeWorker = new Worker("src/services/timer.js");
         }
     }
-          
+
+    destroyTimeWorker() {
+        if(this.timeWorker){
+            this.timeWorker.terminate();
+            this.timeWorker = null;
+        }
+    }       
 }
