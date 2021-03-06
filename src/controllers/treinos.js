@@ -11,7 +11,6 @@ export default class TreinosController {
         this.model.getNewest()
             .then(data => {
                 this.view.renderNewest(data);
-                console.log(this.model.newest);
             })
     }
 }

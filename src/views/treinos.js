@@ -43,7 +43,6 @@ export default class TreinosView {
     tableHTML(table) {
 
         const treinos = JSON.parse(table.json);
-        console.log(treinos);
 
         let html = ``;
         html += `<div class="guitar-table-info">Nome da tabela: <span>${table.name}</span>

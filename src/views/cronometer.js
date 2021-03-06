@@ -23,6 +23,14 @@ export default class CronometerView {
         this.cronometerElement.style.display = 'block';
     }
 
+    hideCronometer = () => {
+        this.cronometerElement.style.display = 'none';
+    }
+
+    buttonsHandlers() {
+        this.getElement('#close-cr').addEventListener('click', this.hideCronometer);
+    }
+
     dragMouseDown = (e) => {
         e = e || window.event;
         e.preventDefault();
@@ -99,6 +107,7 @@ export default class CronometerView {
 
         this.cronometerElement = this.getElement('#chronometer');
         this.dragElement(this.cronometerElement);
+        this.buttonsHandlers();
 
     }
 
