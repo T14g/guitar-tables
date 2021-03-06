@@ -1,8 +1,9 @@
 export default class TreinosController {
 
-    constructor(model, view, cronometer) {
+    constructor(model, view, modal, cronometer) {
         this.model = model;
         this.view = view;
+        this.modal = modal;
         this.cronometer = cronometer;
         this.onLoadNewest();
     }
@@ -13,7 +14,23 @@ export default class TreinosController {
             .then(data => {
                 this.view.renderNewest(data);
                 this.cronometerEventsHandler();
+                this.tempoEventHandler();
             })
+    }
+
+    onShowTempo = (e) => {
+        const id = e.target.dataset.tableId;
+
+        this.model.tempos.model.getTempos(id)
+            .then((response) =>{
+                let data = { title : 'Registros de Tempo', precontent: '', content : ''}
+            })
+
+        // this.modal.view.showModal();
+    }
+    
+    tempoEventHandler = () => {
+        document.querySelector('.tempos-tabela').addEventListener('click', this.onShowTempo)
     }
 
     cronometerStopPropagation = () => {

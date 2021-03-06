@@ -1,5 +1,13 @@
-export default class TemposView{
+export default class TemposView {
+
     constructor() {
-        
+
     }
+
+    formatTempo = (data) => {
+
+
+
+    }
+
 }

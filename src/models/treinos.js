@@ -1,16 +1,11 @@
-import CronometerModel from '../models/cronometer.js';
-import CronometerView from '../views/cronometer.js';
-import CronometerController from '../controllers/cronometer.js';
 import TemposModel from '../models/tempos.js';
 import TemposView from '../views/tempos.js';
 import TemposController from '../controllers/tempos.js';
-
-
 export default class TreinosModel {
 
     constructor() {
         this.treinos = [];
-        this.newest = {};
+        this.tempos = null;
     }
 
     getTreinos = async () => {
@@ -30,7 +25,7 @@ export default class TreinosModel {
             .then((response) => {
                 let newest = response.data[0];
                 this.newest = newest;
-                this.newest.tempos = new TemposController(new TemposModel(this.newest._id), new TemposView());
+                this.tempos = new TemposController(new TemposModel(), new TemposView());
                 return newest;
             })
 

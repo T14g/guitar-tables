@@ -1,5 +1,6 @@
 export default class TemposController{
-    constructor() {
-        
+    constructor(model, view) {
+        this.model = model;
+        this.view = view;
     }
 }

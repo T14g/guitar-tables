@@ -1,11 +1,11 @@
 export default class TemposModel {
 
-    constructor(treinoID) {
-        this.treinoID = treinoID;
+    constructor() {
+
     }
 
-    getTempos = async () => {
-        const result = axios.get('http://localhost:3000/tempos/' + this.treinoID)
+    getTempos = async (id) => {
+        const result = axios.get('http://localhost:3000/tempos/' + id)
             .then((response) => {
                 return response.data;
 
