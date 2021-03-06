@@ -22,13 +22,12 @@ export default class TreinosController {
         const id = e.target.dataset.tableId;
 
         this.model.tempos.model.getTempos(id)
-            .then((response) =>{
-                let data = { title : 'Registros de Tempo', precontent: '', content : ''}
+            .then((data) => {
+                const tempos = this.model.tempos.onGetTempos(data);
+                this.modal.onShowModal(tempos);
             })
-
-        // this.modal.view.showModal();
     }
-    
+
     tempoEventHandler = () => {
         document.querySelector('.tempos-tabela').addEventListener('click', this.onShowTempo)
     }

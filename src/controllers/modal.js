@@ -4,15 +4,22 @@ export default class ModalController{
         this.model = model;
         this.view = view;
         this.view.renderModal();
+        this.setEventHandlers();
     }
 
-    updateHandlers = () => {
+    setEventHandlers = () => {
+        document.querySelector('.close-custom-modal').addEventListener('click', this.onCloseModal);
+    }
+
+    onShowModal = (data) => {
+        this.view.updateModal(data.title, data.pre, data.html);
+        this.view.blockScroll();
         this.view.showModal();
     }
 
-    onShowModal = (e) => {
-        console.log(e);
-        // this.view.updateModal()
+    onCloseModal = () => {
+        this.view.unlockScroll();
+        this.view.hideModal();
     }
 
 }

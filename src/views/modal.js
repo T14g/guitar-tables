@@ -9,14 +9,26 @@ export default class ModalView {
         return element;
     }
 
-    showModal = (e) => {
+    showModal = () => {
         this.getElement('.custom-modal').style.display = 'block';
     }
 
-    updateModal = (data) => {
-        this.getElement('.custom-modal-title').innerHTML = data.title;
-        this.getElement('.custom-modal-precontent').innerHTML = data.precontent;
-        this.getElement('.ccustom-modal-content-inner').innerHTML = data.content;
+    hideModal = () => {
+        this.getElement('.custom-modal').style.display = 'none';
+    }
+
+    blockScroll = () => {
+        this.getElement('body').style.overflow = 'hidden';
+    }
+
+    unlockScroll = () => {
+        this.getElement('body').style.overflow = 'auto';
+    }
+
+    updateModal = (title, precontent, content) => {
+        this.getElement('.custom-modal-title').innerHTML = title;
+        this.getElement('.custom-modal-precontent').innerHTML = precontent;
+        this.getElement('.custom-modal-content-inner').innerHTML = content;
     }
 
     modalHTML = () => {
