@@ -14,6 +14,15 @@ export default class CronometerView {
         return element;
     }
 
+    updateCronometerName(name) {
+        this.getElement('.cr-title').innerHTML = name;
+    }
+
+    showCronometer = (treino) => {
+        this.updateCronometerName(treino.name);
+        this.cronometerElement.style.display = 'block';
+    }
+
     dragMouseDown = (e) => {
         e = e || window.event;
         e.preventDefault();
@@ -56,11 +65,11 @@ export default class CronometerView {
     }
 
 
-    cronometerHTML(data) {
+    cronometerHTML() {
 
         let html = `
             <div id="chronometer">
-                <div class="cr-title">${data.name}</div>
+                <div class="cr-title">${this.cronometerName}</div>
                 <div class="cr-display">
                     <input type="text" id="cr-time" placeholder="00:00:00"> 
                 </div>
