@@ -6,6 +6,7 @@ export default class TreinosModel {
     constructor() {
         this.treinos = [];
         this.tempos = null;
+        this.newest = null;
     }
 
     getTreinos = async () => {

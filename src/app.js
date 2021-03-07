@@ -16,3 +16,5 @@ const MODAL = new ModalController(new ModalModel(), new ModalView(APP_CONTAINER)
 const CRONOMETER = new CronometerController(new CronometerModel(), new CronometerView(APP_CONTAINER));
 const TREINOS = new TreinosController(new TreinosModel(), new TreinosView(APP_CONTAINER), MODAL, CRONOMETER);
 
+document.querySelector('.botao-listar').addEventListener('click', TREINOS.onListTreinos);
+document.querySelector('.load-home').addEventListener('click', TREINOS.onShowNewest);

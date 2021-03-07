@@ -66,4 +66,13 @@ export default class TreinosView {
     renderNewest(data) {
         this.render(this.tableHTML(data));
     }
+
+    renderList = (data) => {
+        let html = '';
+
+        if (data.length > 0) {
+            data.reverse().map(table => html += this.tableHTML(table));
+            this.render(html);
+        }
+    }
 }

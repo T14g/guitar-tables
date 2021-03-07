@@ -9,7 +9,6 @@ export default class TemposModel {
             .then((response) => {
                 this.tempos = response.data;
                 return response.data;
-
             })
 
         return result;

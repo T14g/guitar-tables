@@ -28,6 +28,24 @@ export default class TreinosController {
             })
     }
 
+    onListTreinos = (e) => {
+        e.preventDefault();
+
+        this.model.getTreinos()
+            .then((treinos) => {
+                this.view.renderList(treinos);
+                this.cronometerEventsHandler();
+                this.tempoEventHandler();
+            })
+    }
+
+    onShowNewest = (e) => {
+        e.preventDefault();
+
+        this.view.renderNewest(this.model.newest);
+
+    }
+
     onShowTempoTotals = () => {
         const tempos = this.model.tempos.onGetTemposTotals();
         this.modal.onShowModal(tempos);
@@ -39,7 +57,15 @@ export default class TreinosController {
     }
 
     tempoEventHandler = () => {
-        document.querySelector('.tempos-tabela').addEventListener('click', this.onShowTempo);
+
+        const elements = document.querySelectorAll('.tempos-tabela');
+
+        [...elements].map(el => {
+            el.onclick = (e) => {
+                this.onShowTempo(e);
+            }
+        })
+
         document.querySelector('.custom-btn-detalhes').addEventListener('click', this.onShowTempoDetails);
         document.querySelector('.custom-btn-totals').addEventListener('click', this.onShowTempoTotals);
     }
