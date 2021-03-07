@@ -28,8 +28,20 @@ export default class TreinosController {
             })
     }
 
+    onShowTempoTotals = () => {
+        const tempos = this.model.tempos.onGetTemposTotals();
+        this.modal.onShowModal(tempos);
+    }
+
+    onShowTempoDetails = () => {
+        const tempos = this.model.tempos.onGetTemposDetails();
+        this.modal.onShowModal(tempos);
+    }
+
     tempoEventHandler = () => {
-        document.querySelector('.tempos-tabela').addEventListener('click', this.onShowTempo)
+        document.querySelector('.tempos-tabela').addEventListener('click', this.onShowTempo);
+        document.querySelector('.custom-btn-detalhes').addEventListener('click', this.onShowTempoDetails);
+        document.querySelector('.custom-btn-totals').addEventListener('click', this.onShowTempoTotals);
     }
 
     cronometerStopPropagation = () => {
