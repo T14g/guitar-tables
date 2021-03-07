@@ -5,19 +5,19 @@ export default class TemposController{
     }
 
     onGetTempos = (data) => {
-        const tempos = this.view.totalTime(data);
+        const tempos = this.model.totalTime(data);
         const html = this.view.temposHTML(tempos);
         const title = "Tempos registrados";
-        const preContent = 'Tempo total: ' + this.view.sumAllTimers(data);
+        const preContent = 'Tempo total: ' + this.model.sumAllTimers(data);
 
         return { title: title, pre: preContent, html: html };
     }
 
     onGetTemposTotals = () => {
-        const tempos = this.view.totalTime(this.model.tempos);
+        const tempos = this.model.totalTime(this.model.tempos);
         const html = this.view.temposHTML(tempos);
         const title = "Tempos registrados";
-        const preContent = 'Tempo total: ' + this.view.sumAllTimers(this.model.tempos);
+        const preContent = 'Tempo total: ' + this.model.sumAllTimers(this.model.tempos);
 
         return { title: title, pre: preContent, html: html };
     }
@@ -25,7 +25,7 @@ export default class TemposController{
     onGetTemposDetails = () => {
         const html = this.view.temposHTML(this.model.tempos);
         const title = "Tempos registrados";
-        const preContent = 'Tempo total: ' + this.view.sumAllTimers(this.model.tempos);
+        const preContent = 'Tempo total: ' + this.model.sumAllTimers(this.model.tempos);
 
         return { title: title, pre: preContent, html: html };
     }
