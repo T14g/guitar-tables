@@ -1,6 +1,3 @@
-import TemposModel from '../models/tempos.js';
-import TemposView from '../views/tempos.js';
-import TemposController from '../controllers/tempos.js';
 export default class TreinosModel {
 
     constructor() {
@@ -26,7 +23,6 @@ export default class TreinosModel {
             .then((response) => {
                 let newest = response.data[0];
                 this.newest = newest;
-                this.tempos = new TemposController(new TemposModel(), new TemposView());
                 return newest;
             })
 

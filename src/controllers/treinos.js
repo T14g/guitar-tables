@@ -1,3 +1,6 @@
+import TemposModel from '../models/tempos.js';
+import TemposView from '../views/tempos.js';
+import TemposController from '../controllers/tempos.js';
 export default class TreinosController {
 
     constructor(model, view, modal, cronometer) {
@@ -5,6 +8,7 @@ export default class TreinosController {
         this.view = view;
         this.modal = modal;
         this.cronometer = cronometer;
+        this.newest = null;
         this.onLoadNewest();
     }
 
@@ -13,7 +17,10 @@ export default class TreinosController {
         this.model.getNewest()
             .then(data => {
                 this.view.renderNewest(data);
+                this.newest = data;
+                this.newest.tempos = new TemposController(new TemposModel(), new TemposView());
                 this.cronometerEventsHandler();
+
                 this.tempoEventHandler();
             })
     }
@@ -21,9 +28,9 @@ export default class TreinosController {
     onShowTempo = (e) => {
         const id = e.target.dataset.tableId;
 
-        this.model.tempos.model.getTempos(id)
+        this.newest.tempos.model.getTempos(id)
             .then((data) => {
-                const tempos = this.model.tempos.onGetTempos(data);
+                const tempos = this.newest.tempos.onGetTempos(data);
                 this.modal.onShowModal(tempos);
             })
     }
@@ -39,6 +46,12 @@ export default class TreinosController {
             })
     }
 
+    onCreateTreino = (e) => {
+        e.preventDefault();
+
+
+    }
+
     onShowNewest = (e) => {
         e.preventDefault();
 
@@ -47,12 +60,12 @@ export default class TreinosController {
     }
 
     onShowTempoTotals = () => {
-        const tempos = this.model.tempos.onGetTemposTotals();
+        const tempos = this.newest.tempos.onGetTemposTotals();
         this.modal.onShowModal(tempos);
     }
 
     onShowTempoDetails = () => {
-        const tempos = this.model.tempos.onGetTemposDetails();
+        const tempos = this.newest.tempos.onGetTemposDetails();
         this.modal.onShowModal(tempos);
     }
 
