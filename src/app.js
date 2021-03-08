@@ -18,3 +18,4 @@ const TREINOS = new TreinosController(new TreinosModel(), new TreinosView(APP_CO
 
 document.querySelector('.botao-listar').addEventListener('click', TREINOS.onListTreinos);
 document.querySelector('.load-home').addEventListener('click', TREINOS.onShowNewest);
+document.querySelector('.botao-nova').addEventListener('click', TREINOS.onCreateTreino);

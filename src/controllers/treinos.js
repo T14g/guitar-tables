@@ -1,6 +1,11 @@
 import TemposModel from '../models/tempos.js';
 import TemposView from '../views/tempos.js';
-import TemposController from '../controllers/tempos.js';
+import TemposController from './tempos.js';
+import TiposModel from '../models/tipos.js';
+import TiposView from '../views/tipos.js';
+import TiposController from './tipos.js';
+
+
 export default class TreinosController {
 
     constructor(model, view, modal, cronometer) {
@@ -9,6 +14,7 @@ export default class TreinosController {
         this.modal = modal;
         this.cronometer = cronometer;
         this.newest = null;
+        this.tipos = null;
         this.onLoadNewest();
     }
 
@@ -48,8 +54,9 @@ export default class TreinosController {
 
     onCreateTreino = (e) => {
         e.preventDefault();
-
-
+        this.view.renderCreate();
+        this.tipos = new TiposController(new TiposModel(), new TiposView('.opcoes-disponiveis'));
+        this.tipos.onDisplayTipos();
     }
 
     onShowNewest = (e) => {
