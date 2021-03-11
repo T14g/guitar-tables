@@ -29,4 +29,11 @@ export default class TreinosModel {
         return await result;
     }
 
+    saveTreino = async ({ name, json }) => {
+        axios.post('http://localhost:3000/treino', {
+            name: name,
+            json: json
+        })
+    }
+
 }

@@ -57,13 +57,62 @@ export default class TreinosController {
         this.view.renderCreate();
         this.tipos = new TiposController(new TiposModel(), new TiposView('.opcoes-disponiveis'));
         this.tipos.onDisplayTipos();
+
+        document.querySelector('#send-form').addEventListener('click', this.onSaveTreino);
     }
 
     onShowNewest = (e) => {
         e.preventDefault();
-
         this.view.renderNewest(this.model.newest);
+    }
 
+    onGetSaveData = () => {
+
+        const title = document.querySelector('[name="nome-registro"]');
+        const dias = [
+            { 'domingo': document.querySelector('#treino-domingo') },
+            { 'segunda': document.querySelector('#treino-segunda') },
+            { 'terca': document.querySelector('#treino-terca') },
+            { 'quarta': document.querySelector('#treino-quarta') },
+            { 'quinta': document.querySelector('#treino-quinta') },
+            { 'sexta': document.querySelector('#treino-sexta') },
+            { 'sabado': document.querySelector('#treino-sabado') }];
+
+        const treinos = {};
+
+        dias.forEach((dia) => {
+            let name = Object.keys(dia)[0];
+            let data = Object.values(dia)[0];
+
+            if (data.children.length > 0) {
+                let elements = [...data.children];
+                let arr = [];
+
+                elements.map(el => {
+                    arr.push(el.innerHTML);
+                })
+
+                treinos[name] = arr;
+            }
+        })
+
+        let objeto = {
+            'name': title.value,
+            'json': JSON.stringify(treinos)
+        };
+
+        return objeto;
+
+    }
+
+    onSaveTreino = () => {
+        const data = this.onGetSaveData();
+        this.model.saveTreino(data)
+            .then(() => {
+                this.model.getNewest().then(() => {
+                    this.view.renderNewest(this.model.newest)
+                })
+            })
     }
 
     onShowTempoTotals = () => {
@@ -118,5 +167,4 @@ export default class TreinosController {
 
         this.cronometerStopPropagation();
     }
-
 }
