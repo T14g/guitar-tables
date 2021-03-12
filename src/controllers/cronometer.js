@@ -25,7 +25,7 @@ export default class CronometerController {
 
     onSaveTimer = (e) => {
 
-        const id_table  = e.target.dataset.id_table;
+        const id_table  = e.target.dataset.idTable;
         const titulo    = this.view.getElement('.cr-title').innerHTML;
         const tempo     = this.view.getElement('#cr-time').value;
 
@@ -34,6 +34,11 @@ export default class CronometerController {
             table_id : id_table,
             tempo : tempo
         }
+
+        this.model.saveTempo(data)
+        .then(response => {
+            console.log(response);
+        })
     }
 
     initHandlers = () => {

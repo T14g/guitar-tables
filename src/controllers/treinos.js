@@ -161,6 +161,7 @@ export default class TreinosController {
                 let _id = e.target.dataset.tableId;
                 let treino = { name: _name, id: _id };
                 this.cronometer.view.showCronometer(treino);
+                this.cronometer.view.setTableID(_id);
 
             }
         })
