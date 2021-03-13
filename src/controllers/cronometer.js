@@ -25,20 +25,21 @@ export default class CronometerController {
 
     onSaveTimer = (e) => {
 
-        const id_table  = e.target.dataset.idTable;
-        const titulo    = this.view.getElement('.cr-title').innerHTML;
-        const tempo     = this.view.getElement('#cr-time').value;
+        const table_id = e.target.dataset.idTable;
+        const titulo = this.view.getElement('.cr-title').innerHTML;
+        const tempo = this.view.getElement('#cr-time').value;
 
         let data = {
             titulo: titulo,
-            table_id : id_table,
-            tempo : tempo
+            table_id: table_id,
+            tempo: tempo
         }
 
         this.model.saveTempo(data)
-        .then(response => {
-            console.log(response);
-        })
+            .then(() => {
+                this.view.hideCronometer();
+                this.onStopTimer();
+            })
     }
 
     initHandlers = () => {

@@ -91,7 +91,7 @@ export default class CronometerView {
             <div id="chronometer">
                 <div class="cr-title">${this.cronometerName}</div>
                 <div class="cr-display">
-                    <input type="text" id="cr-time" placeholder="00:00:00"> 
+                    <input type="text" id="cr-time" placeholder="00:00:00" value="00:00:00"> 
                 </div>
                 
                 <div id="buttons">

@@ -20,7 +20,7 @@ export default class CronometerModel {
     saveTempo = async (data) => {
         return await axios.post('http://localhost:3000/tempos', {
             titulo: data.titulo,
-            table_id: data.id_table,
+            table_id: data.table_id,
             tempo: data.tempo
         }).then((response) => {
             return response;
