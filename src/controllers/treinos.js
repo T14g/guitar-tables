@@ -27,7 +27,7 @@ export default class TreinosController {
                 this.newest.tempos = new TemposController(new TemposModel(), new TemposView());
                 this.cronometerEventsHandler();
 
-                this.tempoEventHandler();
+                this.treinosEventHandlers();
             })
     }
 
@@ -48,7 +48,7 @@ export default class TreinosController {
             .then((treinos) => {
                 this.view.renderList(treinos);
                 this.cronometerEventsHandler();
-                this.tempoEventHandler();
+                this.treinosEventHandlers();
             })
     }
 
@@ -64,6 +64,7 @@ export default class TreinosController {
     onShowNewest = (e) => {
         e.preventDefault();
         this.view.renderNewest(this.model.newest);
+        document.querySelector('.excluir-tabela').addEventListener('click', this.onDeleteTreino);
     }
 
     onGetSaveData = () => {
@@ -110,8 +111,18 @@ export default class TreinosController {
         this.model.saveTreino(data)
             .then(() => {
                 this.model.getNewest().then(() => {
-                    this.view.renderNewest(this.model.newest)
+                    this.view.renderNewest(this.model.newest);
                 })
+            })
+    }
+
+
+
+    onDeleteTreino = (e) => {
+        const id = e.target.dataset.tableId;
+        this.model.deleteTreino(id)
+            .then((response) => {
+                this.onLoadNewest();
             })
     }
 
@@ -125,7 +136,7 @@ export default class TreinosController {
         this.modal.onShowModal(tempos);
     }
 
-    tempoEventHandler = () => {
+    treinosEventHandlers = () => {
 
         const elements = document.querySelectorAll('.tempos-tabela');
 
@@ -137,6 +148,15 @@ export default class TreinosController {
 
         document.querySelector('.custom-btn-detalhes').addEventListener('click', this.onShowTempoDetails);
         document.querySelector('.custom-btn-totals').addEventListener('click', this.onShowTempoTotals);
+
+        let deleteButtons = document.querySelectorAll('.excluir-tabela');
+        deleteButtons = [...deleteButtons];
+
+        deleteButtons.map(el => {
+            el.onclick = (e) => {
+                this.onDeleteTreino(e);
+            }
+        })
     }
 
     cronometerStopPropagation = () => {

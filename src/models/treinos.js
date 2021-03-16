@@ -36,4 +36,13 @@ export default class TreinosModel {
         })
     }
 
+    deleteTreino = async (id) => {
+        let result = axios.delete('http://localhost:3000/treino/' + id)
+            .then((response) => {
+                return response.data;
+            })
+
+        return result;
+    }
+
 }
