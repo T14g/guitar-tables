@@ -126,6 +126,19 @@ export default class TreinosController {
             })
     }
 
+    onEditTreino = (e) => {
+        const id = e.target.dataset.tableId;
+
+        this.model.getTreino(id)
+            .then((response) => {
+                console.log(response);
+                this.view.renderEdit(response);
+                this.tipos = new TiposController(new TiposModel(), new TiposView('.opcoes-disponiveis'));
+                this.tipos.onDisplayTipos();
+            })
+
+    }
+
     onShowTempoTotals = () => {
         const tempos = this.newest.tempos.onGetTemposTotals();
         this.modal.onShowModal(tempos);
@@ -155,6 +168,15 @@ export default class TreinosController {
         deleteButtons.map(el => {
             el.onclick = (e) => {
                 this.onDeleteTreino(e);
+            }
+        })
+
+        let editButtons = document.querySelectorAll('.editar-tabela');
+        editButtons = [...editButtons];
+
+        editButtons.map(el => {
+            el.onclick = (e) => {
+                this.onEditTreino(e);
             }
         })
     }
