@@ -54,7 +54,7 @@ export default class TreinosController {
 
     onCreateTreino = (e) => {
         e.preventDefault();
-        this.view.renderCreate();
+        this.view.renderInputTable();
         this.tipos = new TiposController(new TiposModel(), new TiposView('.opcoes-disponiveis'));
         this.tipos.onDisplayTipos();
 
@@ -126,15 +126,40 @@ export default class TreinosController {
             })
     }
 
+    injectData = (data) => {
+
+        let treinos = JSON.parse(data.json);
+        let elementNumber = 1;
+        const diasArray = ['domingo','segunda', 'terca', 'quarta', 'quinta', 'sexta', 'sabado'];
+
+        document.querySelector('[name="nome-registro"]').value = data.name;
+
+        diasArray.map(dia => {
+            if(treinos[dia] && treinos[dia].length > 0){
+                let html = ``;
+        
+                treinos[dia].map(item => {
+                    html += ` <span  draggable="true" data-index=${elementNumber} draggable="true" class="train-option">${item}</span>`;
+                    elementNumber++;
+                })
+        
+                document.querySelector('#treino-' + dia + '').innerHTML = html;
+            }
+        });
+
+
+    }
+
     onEditTreino = (e) => {
         const id = e.target.dataset.tableId;
 
         this.model.getTreino(id)
             .then((response) => {
                 console.log(response);
-                this.view.renderEdit(response);
+                this.view.renderInputTable();
                 this.tipos = new TiposController(new TiposModel(), new TiposView('.opcoes-disponiveis'));
                 this.tipos.onDisplayTipos();
+                this.injectData(response);
             })
 
     }
