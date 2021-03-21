@@ -11,7 +11,7 @@ const acordeRouter = require('./routers/acordes');
 
 const app = express();
 
-const port = process.env.PORT ;
+const port = 3000;
 
 //Parses incoming request with json to objects
 app.use(cors());
