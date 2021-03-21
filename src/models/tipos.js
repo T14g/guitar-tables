@@ -13,4 +13,17 @@ export default class TiposModel {
 
         return result;
     }
+
+    newTipo = async (category, name) => {
+
+        let result = axios.post('http://localhost:3000/tipo', {
+            name: name,
+            category: category
+        }).then((result) => {
+            return result;
+        })
+
+        return result;
+        
+    }
 }

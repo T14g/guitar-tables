@@ -57,7 +57,6 @@ export default class TreinosController {
         this.view.renderInputTable();
         this.tipos = new TiposController(new TiposModel(), new TiposView('.opcoes-disponiveis'));
         this.tipos.onDisplayTipos();
-
         document.querySelector('#send-form').addEventListener('click', this.onSaveTreino);
     }
 
