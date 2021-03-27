@@ -64,6 +64,8 @@ export default class TreinosController {
         e.preventDefault();
         this.view.renderNewest(this.model.newest);
         document.querySelector('.excluir-tabela').addEventListener('click', this.onDeleteTreino);
+        this.cronometerEventsHandler();
+        this.treinosEventHandlers();
     }
 
     onGetSaveData = () => {
