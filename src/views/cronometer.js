@@ -26,7 +26,7 @@ export default class CronometerView {
         this.getElement('#btn-salvar').dataset.idTable = tableID;
     }
 
-    resetTime = () =>{
+    resetTime = () => {
         this.getElement('#cr-time').value = '00:00:00';
     }
 

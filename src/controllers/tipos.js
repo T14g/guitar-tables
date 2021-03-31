@@ -13,7 +13,7 @@ export default class TiposController {
     }
 
     onCreateHandler = () => {
-        document.querySelector('.add-new-tipo').addEventListener('click', this.onCreate );
+        document.querySelector('.add-new-tipo').addEventListener('click', this.onCreate);
     }
 
     onCreate = () => {

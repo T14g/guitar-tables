@@ -131,19 +131,19 @@ export default class TreinosController {
 
         let treinos = JSON.parse(data.json);
         let elementNumber = 1;
-        const diasArray = ['domingo','segunda', 'terca', 'quarta', 'quinta', 'sexta', 'sabado'];
+        const diasArray = ['domingo', 'segunda', 'terca', 'quarta', 'quinta', 'sexta', 'sabado'];
 
         document.querySelector('[name="nome-registro"]').value = data.name;
 
         diasArray.map(dia => {
-            if(treinos[dia] && treinos[dia].length > 0){
+            if (treinos[dia] && treinos[dia].length > 0) {
                 let html = ``;
-        
+
                 treinos[dia].map(item => {
                     html += ` <span  draggable="true" data-index=${elementNumber} draggable="true" class="train-option">${item}</span>`;
                     elementNumber++;
                 })
-        
+
                 document.querySelector('#treino-' + dia + '').innerHTML = html;
             }
         });

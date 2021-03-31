@@ -1,4 +1,4 @@
-export default class ModalController{
+export default class ModalController {
 
     constructor(model, view) {
         this.model = model;

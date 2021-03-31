@@ -81,7 +81,7 @@ export default class TiposView {
     }
 
     drag = (e) => {
-        
+
         if (e.target.id) {
             e.dataTransfer.setData("text", e.target.id);
         }

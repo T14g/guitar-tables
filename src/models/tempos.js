@@ -90,7 +90,7 @@ export default class TemposModel {
         const result = axios.get('http://localhost:3000/tempos/' + id)
             .then((response) => {
                 this.tempos = response.data;
-             
+
                 return response.data;
             })
 
