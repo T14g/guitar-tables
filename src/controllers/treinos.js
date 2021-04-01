@@ -117,6 +117,11 @@ export default class TreinosController {
             })
     }
 
+    onUpdateTreino = (id) => {
+        const data= this.onGetSaveData();
+        this.model.updateTreino(id,data);
+    }
+
 
 
     onDeleteTreino = (e) => {
@@ -161,6 +166,9 @@ export default class TreinosController {
                 this.tipos = new TiposController(new TiposModel(), new TiposView('.opcoes-disponiveis'));
                 this.tipos.onDisplayTipos();
                 this.injectData(response);
+                document.querySelector('#send-form').addEventListener('click', () => {
+                    this.onUpdateTreino(id);
+                });
             })
 
     }
