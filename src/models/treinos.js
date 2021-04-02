@@ -56,14 +56,18 @@ export default class TreinosModel {
 
     updateTreino = async (id, data) => {
 
-        fetch('http://localhost:3000/treino/' + id, {
+        let result = fetch('http://localhost:3000/treino/' + id, {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
             method: "PATCH",
             body: JSON.stringify(data)
+        }).then(response => {
+            return response;
         })
+
+        return result;
     }
 
 }

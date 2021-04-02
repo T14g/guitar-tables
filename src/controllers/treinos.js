@@ -43,7 +43,7 @@ export default class TreinosController {
 
     onListTreinos = (e) => {
         e.preventDefault();
-
+        console.log("foreverrrr");
         this.model.getTreinos()
             .then((treinos) => {
                 this.view.renderList(treinos);
@@ -118,8 +118,11 @@ export default class TreinosController {
     }
 
     onUpdateTreino = (id) => {
-        const data= this.onGetSaveData();
-        this.model.updateTreino(id,data);
+        const data = this.onGetSaveData();
+        this.model.updateTreino(id, data).then(() => {
+            this.onLoadNewest();
+        })
+
     }
 
 
