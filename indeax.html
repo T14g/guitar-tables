@@ -2,8 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guitar Tables</title>
+    <title>Guitar Tables - T14g</title>
 
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/toastr.min.css">
@@ -49,53 +50,15 @@
             </div>
           </nav>
     </header>    
-    
-    <div class="container" >
-      <div id="app-container" class="mt-5">
-        <!-- The Magic happens here  -->
-      </div>
 
-     
-        <div id="chronometer">
-          <div class="cr-title">Título do cronometro</div>
-          <div class="cr-display">
-            <input type="text" id="cr-time" placeholder="00:00:00"> 
-          </div>
-          
-        <div id="buttons">
-
-          <div class="btn-box-cr">
-            <button class="btn-success btn" id="start-cr">Start</button>
-            <button class="btn-danger btn" id="stop-cr">Stop</button>
-          </div>
-          
-          <div class="btn-box-cr">
-            <button class="btn-info btn" id="clear-cr">Clear</button>
-            <button class="btn-danger btn" id="close-cr">Close</button>
-          </div>
-
-          <div class="btn btn-success" id="btn-salvar" data-id_table="">Salvar</div>
-
+    <div class="container">
+        <div id="appContainer" class="mt-5">
+            <!-- The Magic happens here  -->
         </div>
-      </div>
-    </div>
-
-    <div class="custom-modal">
-      <div class="custom-modal-inner">
-        <div class="custom-modal-content">
-          <h3 class="custom-modal-title"></h3>
-          <p class="custom-modal-precontent"></p>
-          <hr>
-          <div class="custom-modal-content-inner"></div>
-          <button class="btn btn-info custom-btn-detalhes">Detalhes</button>
-          <button class="btn btn-success custom-btn-totals">Totals</button>
-          <button class="btn btn-danger close-custom-modal">Fechar</button>
-        </div>
-      </div>
     </div>
 
     <footer class="bg-dark">
-      <p class="font-weight-bold small text-center mb-0">&copy; 2021 Código desenvolvido por <a href="https://github.com/t14g" target="_blank">T14g</a></p>
+        <p class="font-weight-bold small text-center mb-0">&copy; 2021 Código desenvolvido por <a href="https://github.com/t14g" target="_blank">T14g</a></p>
     </footer>
 
     <!-- Jquery CDN -->
@@ -109,7 +72,7 @@
     <script src="./assets/js/util.js"></script>
     <script src="./assets/js/bootstrap.min.js"></script>
     <script src="./assets/js/toastr.min.js"></script>
-
-    <script type="module" src="./modules/main.js"></script>
+    
+    <script type="module" src="src/app.js"></script>
 </body>
 </html>
