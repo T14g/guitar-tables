@@ -1,7 +1,9 @@
 export default class TemposController {
-    constructor(model, view) {
+    constructor(model, view, container) {
         this.model = model;
         this.view = view;
+        this.container = container;
+        this.onShowTotals();
     }
 
     onGetTempos = (data) => {
@@ -11,6 +13,15 @@ export default class TemposController {
         const preContent = 'Tempo total: ' + this.model.sumAllTimers(data);
 
         return { title: title, pre: preContent, html: html };
+    }
+
+    onShowTotals = () => {
+        console.log(this.model);
+        this.model.getAllTempos()
+            .then((response)=>{
+                console.log(response);
+            })
+        // console.log(tempos);
     }
 
     onGetTemposTotals = () => {

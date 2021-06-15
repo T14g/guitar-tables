@@ -10,11 +10,18 @@ import ModalModel from './models/modal.js';
 import ModalView from './views/modal.js';
 import ModalController from './controllers/modal.js';
 
+import TemposModel from './models/tempos.js';
+import TemposView from './views/tempos.js';
+import TemposController from './controllers/tempos.js';
+
 
 const APP_CONTAINER = '#appContainer';
+const TEMPO_CONTAINER = '#tempoContainer';
+
 const MODAL = new ModalController(new ModalModel(), new ModalView(APP_CONTAINER));
 const CRONOMETER = new CronometerController(new CronometerModel(), new CronometerView(APP_CONTAINER));
 const TREINOS = new TreinosController(new TreinosModel(), new TreinosView(APP_CONTAINER), MODAL, CRONOMETER);
+const TEMPOS = new TemposController(new TemposModel() , new TemposController(), TEMPO_CONTAINER);
 
 document.querySelector('.botao-listar').addEventListener('click', TREINOS.onListTreinos);
 document.querySelector('.load-home').addEventListener('click', TREINOS.onShowNewest);
