@@ -170,8 +170,6 @@ export default class TemposModel {
         let timers = this.totalTime(data);
         let result = "00:00:00";
 
-        console.log(data);
-
         if(timers.length > 0){
             timers.map(item => {
                 result = this.sumTwoTimers(result, item.tempo);
@@ -184,10 +182,13 @@ export default class TemposModel {
     getAllTempos = async () => {
 
         const result = axios.get('http://localhost:3000/tempos/')
-            .then((data) => {
-                const tempoTotal = this.sumAllTimers(data);
+            .then((response) => {
+          
+                const tempoTotal = this.sumAllTimers(response.data);
+                console.log(tempoTotal);
                 const tempoParts = tempoTotal.split(':');
                 return tempoParts;
+                
             })
 
         return result;

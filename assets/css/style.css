@@ -345,3 +345,18 @@ footer p a {
     border-radius: 0;
     font-weight: 600;
 }
+
+#tempoContainer{
+    background: #000;
+    text-align: center;
+    padding: 10px 15px;
+    min-height: 44px;
+}
+
+#tempoContainer p {
+    text-align: center;
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-bottom: 0;
+}

@@ -16,12 +16,17 @@ export default class TemposController {
     }
 
     onShowTotals = () => {
-        console.log(this.model);
-        this.model.getAllTempos()
+
+        if(this.model && this.view){
+           
+            this.model.getAllTempos()
             .then((response)=>{
-                console.log(response);
+                if(this.container && this.view){
+                    this.view.renderPlayedTime(response, this.container);
+                }
             })
-        // console.log(tempos);
+        }
+      
     }
 
     onGetTemposTotals = () => {

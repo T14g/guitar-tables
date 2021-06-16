@@ -18,4 +18,13 @@ export default class TemposView {
         return html;
     }
 
+    renderPlayedTime = (parts, container) => {
+        console.log(parts);
+        // console.log(container);
+        let html = ``;
+        html += `<p>Você já tocou por : ${parts[0]}h: ${parts[1]}min : ${parts[2]}s</p>`;
+        document.querySelector(container).innerHTML = html;
+
+    }
+
 }
