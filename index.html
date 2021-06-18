@@ -29,7 +29,7 @@
               <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navBarGuitar">
-              <ul class="navbar-nav">
+              <!-- <ul class="navbar-nav">
                 <li class="nav-item">
                   <a class="nav-link botao-tempos" href="#">
                     <span class="timer-icon"></span>
@@ -47,10 +47,20 @@
                     <span>Criar Tabela</span>
                   </a>
                 </li>
-              </ul>
+              </ul> -->
             </div>
+            <button class="show-menu btn btn-dark">Show Menu</button>
           </nav>
-    </header>    
+    </header>
+
+    <div class="sidebar hiden">
+      <button class="hide-menu btn btn-dark">Close Menu</button>
+      <ul class="menu">
+        <li>Menu item</li>
+        <li>Menu item</li>
+        <li>Menu item</li>
+      </ul>
+    </div>    
 
     <div class="container">
         <div id="appContainer" class="mt-5">
@@ -61,6 +71,8 @@
     <footer class="bg-dark">
         <p class="font-weight-bold small text-center mb-0">&copy; 2021 Código desenvolvido por <a href="https://github.com/t14g" target="_blank">T14g</a></p>
     </footer>
+
+    <div class="screen-overlay hidden"></div>
 
     <!-- Jquery CDN -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"
