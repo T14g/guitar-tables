@@ -37,6 +37,9 @@ header nav{
     float: left;
     height: 40px;
     width: 40px;
+    position: relative;
+    left: -3px;
+    top: -10px;
 }
 
 .opcoes-disponiveis::after{
@@ -215,6 +218,8 @@ footer p a {
     width: 35px;
     height: auto;
     fill: #fff;
+    position: relative;
+    top: 10px;
 }
 
 #navBarGuitar{
@@ -393,6 +398,8 @@ footer p a {
 .sidebar .menu{
     list-style: none;
     padding-left: 0;
+    max-width: 205px;
+    margin: 0 auto;
 }
 
 .sidebar.hiden{
@@ -400,11 +407,14 @@ footer p a {
 }
 
 .sidebar .menu li{
+    text-align: left;
+}
+
+.sidebar .menu li span{
     color: #fff;
-    text-align: center;
 }
 
 .sidebar .hide-menu{
-    margin: 100px auto 20px;
+    margin: 50px auto 20px;
     display: block;
 }

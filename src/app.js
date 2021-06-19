@@ -23,9 +23,9 @@ const CRONOMETER = new CronometerController(new CronometerModel(), new Cronomete
 const TREINOS = new TreinosController(new TreinosModel(), new TreinosView(APP_CONTAINER), MODAL, CRONOMETER);
 const TEMPOS = new TemposController(new TemposModel() , new TemposView(), TEMPO_CONTAINER);
 
-// document.querySelector('.botao-listar').addEventListener('click', TREINOS.onListTreinos);
-// document.querySelector('.load-home').addEventListener('click', TREINOS.onShowNewest);
-// document.querySelector('.botao-nova').addEventListener('click', TREINOS.onCreateTreino);
+document.querySelector('.botao-listar').addEventListener('click', TREINOS.onListTreinos);
+document.querySelector('.load-home').addEventListener('click', TREINOS.onShowNewest);
+document.querySelector('.botao-nova').addEventListener('click', TREINOS.onCreateTreino);
 
 
 document.querySelector('.show-menu').addEventListener('click', () => {
