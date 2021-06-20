@@ -418,3 +418,35 @@ footer p a {
     margin: 50px auto 20px;
     display: block;
 }
+
+.show-menu, .hide-menu{
+    background: none;
+    border: none;
+}
+
+.show-menu:hover, .hide-menu:hover{
+    cursor: pointer;
+}
+
+.show-menu:focus, .hide-menu:focus{
+    outline: none;
+}
+
+.icon-box .icon-bar{
+    width: 34px;
+    height: 5px;
+    display: block;
+    background: #fff;
+    margin-bottom: 5px;
+}
+
+.hide-menu{
+    border: 2px #fff solid;
+    border-radius: 50%;
+    position: relative;
+    right: -90px;
+}
+
+.hide-menu .close-x{
+    color: #fff;
+}
